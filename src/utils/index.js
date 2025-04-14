@@ -5,7 +5,7 @@
  * const { geometryUtils, positionUtils } = require('sw-jscad').utils
  */
 module.exports = {
-    generalUtils: require('./generalUtils'),
-    geometryUtils: require('./geometryUtils'),
-    positionUtils: require('./positionUtils'),
+    generalUtils: require('./general-utils'),
+    geometryUtils: require('./geometry-utils'),
+    positionUtils: require('./position-utils'),
 }

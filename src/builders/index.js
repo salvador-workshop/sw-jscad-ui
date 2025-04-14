@@ -5,9 +5,9 @@
  * const { archBuilder, columnBuilder } = require('sw-jscad').builders
  */
 module.exports = {
-    archBuilder: require('./archBuilder'),
-    columnBuilder: require('./columnBuilder'),
-    foilBuilder: require('./foilBuilder'),
-    mouldBuilder: require('./mouldBuilder'),
-    profileBuilder: require('./profileBuilder'),
+    archBuilder: require('./arch-builder'),
+    columnBuilder: require('./column-builder'),
+    foilBuilder: require('./foil-builder'),
+    mouldBuilder: require('./mould-builder'),
+    profileBuilder: require('./profile-builder'),
 }

@@ -23,5 +23,8 @@
   "dependencies": {},
   "devDependencies": {
     "jsdoc": "^4.0.4"
+  },
+  "peerDependencies": {
+    "@jscad/modeling": "2.x"
   }
 }

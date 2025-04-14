@@ -18,6 +18,7 @@ module.exports = {
   /**
    * Square with circular notches at corners.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.sqLength - side length for bounding square 
    * @param {number} opts.notchRadius - radius of circular notch
    */
@@ -44,6 +45,7 @@ module.exports = {
   /**
    * Square with circles at corners.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.sqLength - side length for bounding square 
    * @param {number} opts.cornerRadius - radius of circular corner
    */
@@ -72,6 +74,7 @@ module.exports = {
   /**
    * Octagonal
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.sqLength - side length for bounding square 
    */
   octagonal: (opts) => {
@@ -94,6 +97,7 @@ module.exports = {
      * @alias module:profileBuilder.edge.circNotch
      * @function circNotch
      * @param {Object} opts 
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.totalThickness - total thickness of edge
      * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
      * @param {number} opts.smallOffset - small offset between notch and main edge
@@ -131,6 +135,7 @@ module.exports = {
      * @alias module:profileBuilder.edge.circPortrusion
      * @function circPortrusion
      * @param {Object} opts 
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.totalThickness - total thickness of edge
      * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
      * @param {number} opts.smallOffset - small offset between portrusion and main edge

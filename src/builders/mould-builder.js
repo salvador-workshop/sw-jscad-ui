@@ -9,6 +9,7 @@ const { measureBoundingBox } = jscad.measurements
 /**
  * Builds a cuboid with given 2D profile placed on one edge.
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number[]} opts.size - size (x, y, z)
  * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
  * @param {string} opts.alignment - where to align when profile size differs from
@@ -38,6 +39,7 @@ module.exports = {
   /**
    * Positive moulding for a cuboid with the given 2D profile placed onto all the side edges.
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number[]} opts.size - size (x, y, z)
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
@@ -58,6 +60,7 @@ module.exports = {
   /**
    * Positive moulding for a polygonal prism with the given 2D profile placed onto all the side edges.
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.numSides - number of sides in prism
    * @param {number} opts.radius - prism radius (apothem). Distance from centre to midpoint of side
    * @param {number} opts.height - prism height.
@@ -88,6 +91,7 @@ module.exports = {
   /**
    * Positive moulding for a cylinder with the given 2D profile placed onto the edge.
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.radius - Cylinder radius.
    * @param {number} opts.height - Cylinder height.
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
@@ -107,6 +111,7 @@ module.exports = {
   /**
    * Negative mould for a rectangular sunken panel, to be placed on a wall/ceiling surface
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number[]} opts.edge - size (x, y)
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile for edge
    */
@@ -116,6 +121,7 @@ module.exports = {
   /**
    * Negative mould for a circular sunken panel, to be placed on a wall/ceiling surface
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.radius - panel radius
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile for edge
    */

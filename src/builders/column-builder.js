@@ -9,6 +9,7 @@ const { extrudeLinear } = jscad.extrusions
 /**
  * Simple cuboid
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  */
@@ -19,6 +20,7 @@ const colCuboid = (opts) => {
 /**
  * Simple cylinder
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  */
@@ -29,6 +31,7 @@ const colCylinder = (opts) => {
 /**
  * Simple round cylinder
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  * @param {number} opts.roundRadius - radius of cylinder edge
@@ -47,6 +50,7 @@ const capRdCylinder = (opts) => {
 /**
  * Base round cylinder
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  * @param {number} opts.roundRadius - radius of cylinder edge
@@ -65,6 +69,7 @@ const baseRdCylinder = (opts) => {
 /**
  * Simple extrude
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
  */
@@ -109,6 +114,7 @@ module.exports = {
   /**
    * Builds a three-part column using the specified dimensions and styles.
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {Array<string|number|geom2.Geom2|null>} opts.base - specs for column base (style, height, radius, geomProfile)
    * @param {Array<string|number|geom2.Geom2|null>} opts.shaft - specs for column shaft (style, radius, geomProfile)
    * @param {Array<string|number|geom2.Geom2|null>} opts.capital - specs for column capital (style, height, radius, geomProfile)

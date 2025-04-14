@@ -16,6 +16,7 @@ module.exports = {
   /**
    * Builds a one-centre (semicircular) arch.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.arcRadius - arc radius 
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
@@ -37,6 +38,7 @@ module.exports = {
   /**
    * Builds a two-centre pointed arch.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.arcRadius - arc radius 
    * @param {number} opts.archWidth - arch width 
    * @param {number} opts.profileWidth - width of 2D cross-section profile 

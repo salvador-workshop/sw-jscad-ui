@@ -1,20 +1,19 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { circle, cuboid, rectangle } = jscad.primitives
-const { translate, mirror, rotate, align } = jscad.transforms
-const { union, subtract, scission } = jscad.booleans
-const { extrudeRotate } = jscad.extrusions
-const { measureBoundingBox } = jscad.measurements
 
 /**
  * Builds a 2D n-foil opening
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.numLobes - number of lobes
  * @param {number} opts.radius - radius of container circle
  * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
  * @access private
  */
 const buildFoil2d = (opts) => {
+    const { union } = opts.lib.booleans
+    const { rotate, align } = opts.lib.transforms
+    const { circle } = opts.lib.primitives
+
     // console.log(opts);
     // const containerCircle = circle({ radius: opts.radius });
     const centralAngle = Math.PI * 2 / opts.numLobes;
@@ -62,6 +61,7 @@ const buildFoil2d = (opts) => {
 /**
  * Builds a 3D n-foil opening using a given 2D cross-section profile
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.numLobes - number of lobes
  * @param {number} opts.radius - radius of container circle
  * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
@@ -70,6 +70,12 @@ const buildFoil2d = (opts) => {
  * @access private
  */
 const buildFoil3d = (opts) => {
+    const { measureBoundingBox } = opts.lib.measurements
+    const { extrudeRotate } = opts.lib.extrusions
+    const { union, subtract, scission } = opts.lib.booleans
+    const { translate, mirror, rotate, align } = opts.lib.transforms
+    const { cuboid, rectangle } = opts.lib.primitives
+
     console.log(opts);
     // const containerCircle = circle({ radius: opts.radius });
     const centralAngle = Math.PI * 2 / opts.numLobes;
@@ -149,6 +155,7 @@ module.exports = {
     /**
      * Builds a trefoil opening using a given 2d cross-section profile
      * @param {Object} opts
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.radius - radius of container circle
      * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
@@ -164,6 +171,7 @@ module.exports = {
     /**
      * Builds a quatrefoil opening using a given 2d cross-section profile
      * @param {Object} opts
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.radius - radius of container circle
      * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
@@ -179,6 +187,7 @@ module.exports = {
     /**
      * Builds a cinquefoil opening using a given 2d cross-section profile
      * @param {Object} opts
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.radius - radius of container circle
      * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
@@ -194,6 +203,7 @@ module.exports = {
     /**
      * Builds a sexfoil opening using a given 2d cross-section profile
      * @param {Object} opts
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.radius - radius of container circle
      * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
@@ -209,6 +219,7 @@ module.exports = {
     /**
      * Builds an octofoil opening using a given 2d cross-section profile
      * @param {Object} opts
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.radius - radius of container circle
      * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile

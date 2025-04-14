@@ -1,39 +1,44 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { union, subtract } = jscad.booleans
-const { cuboid, cylinder, roundedCylinder } = jscad.primitives
-const { measureBoundingBox } = jscad.measurements
-const { align } = jscad.transforms
-const { extrudeLinear } = jscad.extrusions
 
 /**
  * Simple cuboid
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  */
 const colCuboid = (opts) => {
+  const { cuboid } = opts.lib.primitives
+
   return cuboid({ size: [opts.radius * 2, opts.radius * 2, opts.height] });
 }
 
 /**
  * Simple cylinder
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  */
 const colCylinder = (opts) => {
+  const { cylinder } = opts.lib.primitives
+
   return cylinder({ radius: opts.radius, height: opts.height });
 }
 
 /**
  * Simple round cylinder
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  * @param {number} opts.roundRadius - radius of cylinder edge
  */
 const capRdCylinder = (opts) => {
+  const { align } = opts.lib.transforms
+  const { cuboid, roundedCylinder } = opts.lib.primitives
+  const { subtract } = opts.lib.booleans
+
   const rdRadius = opts.roundRadius || 0.75;
   const baseShape = roundedCylinder({ radius: opts.radius, height: opts.height * 2, roundRadius: rdRadius });
   const cutBlock = align(
@@ -47,11 +52,16 @@ const capRdCylinder = (opts) => {
 /**
  * Base round cylinder
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {number} opts.radius - element radius
  * @param {number} opts.roundRadius - radius of cylinder edge
  */
 const baseRdCylinder = (opts) => {
+  const { align } = opts.lib.transforms
+  const { cuboid, roundedCylinder } = opts.lib.primitives
+  const { subtract } = opts.lib.booleans
+
   const rdRadius = opts.roundRadius || 1;
   const baseShape = roundedCylinder({ radius: opts.radius, height: opts.height * 2, roundRadius: rdRadius });
   const cutBlock = align(
@@ -65,10 +75,13 @@ const baseRdCylinder = (opts) => {
 /**
  * Simple extrude
  * @param {Object} opts
+ * @param {Object} opts.lib - `@jscad/modeling` instance 
  * @param {number} opts.height - element height
  * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
  */
 const colExtrude = (opts) => {
+  const { extrudeLinear } = opts.lib.extrusions
+
   return extrudeLinear({ height: opts.height }, opts.geomProfile);
 }
 
@@ -109,29 +122,37 @@ module.exports = {
   /**
    * Builds a three-part column using the specified dimensions and styles.
    * @param {Object} opts
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {Array<string|number|geom2.Geom2|null>} opts.base - specs for column base (style, height, radius, geomProfile)
    * @param {Array<string|number|geom2.Geom2|null>} opts.shaft - specs for column shaft (style, radius, geomProfile)
    * @param {Array<string|number|geom2.Geom2|null>} opts.capital - specs for column capital (style, height, radius, geomProfile)
    * @param {number} opts.height - total height of column
    */
   threePt: (opts) => {
+    const { align } = opts.lib.transforms
+    const { measureBoundingBox } = opts.lib.measurements
+    const { union } = opts.lib.booleans
+
     const baseStyle = opts.base[0];
     const shaftStyle = opts.shaft[0];
     const capitalStyle = opts.capital[0];
 
     const base = columnPartBuilder.base[baseStyle]({
+      lib: opts.lib,
       height: opts.base[1],
       radius: opts.base[2],
       geomProfile: opts.base[3],
     });
 
     const shaft = columnPartBuilder.shaft[shaftStyle]({
+      lib: opts.lib,
       height: opts.height,
       radius: opts.shaft[1],
       geomProfile: opts.shaft[2],
     });
 
     const capital = columnPartBuilder.capital[capitalStyle]({
+      lib: opts.lib,
       height: opts.capital[1],
       radius: opts.capital[2],
       geomProfile: opts.capital[3],

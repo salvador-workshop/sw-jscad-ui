@@ -1,11 +1,5 @@
 
 "use strict"
-const jscad = require('@jscad/modeling')
-const { union, subtract, intersect } = jscad.booleans
-const { translate, mirror, rotate, align } = jscad.transforms
-const { cuboid, arc } = jscad.primitives
-const { extrudeRotate } = jscad.extrusions
-const { path2, geom2 } = jscad.geometries
 
 /**
  * Builds circle-based arches. Input 2D profiles must be centred at (0, 0, 0)
@@ -16,10 +10,16 @@ module.exports = {
   /**
    * Builds a one-centre (semicircular) arch.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.arcRadius - arc radius 
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   onePt: (opts) => {
+    const { path2, geom2 } = opts.lib.geometries
+    const { extrudeRotate } = opts.lib.extrusions
+    const { arc } = opts.lib.primitives
+    const { translate, rotate, align } = opts.lib.transforms
+
     const arcRad = opts.arcRadius;
 
     if (opts.geomProfile) {
@@ -37,12 +37,19 @@ module.exports = {
   /**
    * Builds a two-centre pointed arch.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.arcRadius - arc radius 
    * @param {number} opts.archWidth - arch width 
    * @param {number} opts.profileWidth - width of 2D cross-section profile 
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   twoPt: (opts) => {
+    const { path2, geom2 } = opts.lib.geometries
+    const { extrudeRotate } = opts.lib.extrusions
+    const { cuboid, arc } = opts.lib.primitives
+    const { translate, mirror, rotate, align } = opts.lib.transforms
+    const { union, subtract, intersect } = opts.lib.booleans
+
     const arcRad = opts.arcRadius;
     const archWth = opts.archWidth;
 

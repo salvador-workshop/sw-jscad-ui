@@ -1,9 +1,4 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { align, translate } = jscad.transforms
-const { union, subtract, intersect } = jscad.booleans
-const { square, circle, rectangle } = jscad.primitives
-const { rotate } = jscad.transforms
 
 const EDGE_PROFILE_MARGIN = 1;
 
@@ -18,10 +13,14 @@ module.exports = {
   /**
    * Square with circular notches at corners.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.sqLength - side length for bounding square 
    * @param {number} opts.notchRadius - radius of circular notch
    */
   sqCornerCircNotch: (opts) => {
+    const { square, circle } = opts.lib.primitives
+    const { union, subtract } = opts.lib.booleans
+
     // TODO - fix implementation. Everything assumes that cornerRad === sqLen / 4.
     // So the bounding square probably would be off if it's changed.
     const sqLen = opts.sqLength;
@@ -44,10 +43,14 @@ module.exports = {
   /**
    * Square with circles at corners.
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.sqLength - side length for bounding square 
    * @param {number} opts.cornerRadius - radius of circular corner
    */
   sqCornerCircles: (opts) => {
+    const { square, circle } = opts.lib.primitives
+    const { union } = opts.lib.booleans
+
     // TODO - fix implementation. Everything assumes that cornerRad === baseSqLen / 4.
     // So the bounding square probably would be off if it's changed.
     const sqLen = opts.sqLength;
@@ -72,9 +75,14 @@ module.exports = {
   /**
    * Octagonal
    * @param {Object} opts 
+   * @param {Object} opts.lib - `@jscad/modeling` instance 
    * @param {number} opts.sqLength - side length for bounding square 
    */
   octagonal: (opts) => {
+    const { rotate } = opts.lib.transforms
+    const { square } = opts.lib.primitives
+    const { intersect } = opts.lib.booleans
+
     const sqLen = opts.sqLength;
     // const octagonSideLen = Math.tan(Math.PI / 8) * (sqLen / 2) * 2;
 
@@ -94,11 +102,16 @@ module.exports = {
      * @alias module:profileBuilder.edge.circNotch
      * @function circNotch
      * @param {Object} opts 
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.totalThickness - total thickness of edge
      * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
      * @param {number} opts.smallOffset - small offset between notch and main edge
      */
     circNotch: (opts) => {
+      const { square, circle, rectangle } = opts.lib.primitives
+      const { union, subtract } = opts.lib.booleans
+      const { align } = opts.lib.transforms
+
       const ornamentThickness = opts.totalThickness - opts.topThickness;
       const smallOffset = opts.smallOffset || ornamentThickness / 6;
       const notchRadius = ornamentThickness - (smallOffset * 2);
@@ -131,11 +144,16 @@ module.exports = {
      * @alias module:profileBuilder.edge.circPortrusion
      * @function circPortrusion
      * @param {Object} opts 
+     * @param {Object} opts.lib - `@jscad/modeling` instance 
      * @param {number} opts.totalThickness - total thickness of edge
      * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
      * @param {number} opts.smallOffset - small offset between portrusion and main edge
      */
     circPortrusion: (opts) => {
+      const { square, circle, rectangle } = opts.lib.primitives
+      const { union, subtract, intersect } = opts.lib.booleans
+      const { align, translate } = opts.lib.transforms
+
       const ornamentThickness = opts.totalThickness - opts.topThickness;
       const smallOffset = opts.smallOffset || ornamentThickness / 8;
       const circRadius = ornamentThickness - (smallOffset * 3);

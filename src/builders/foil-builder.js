@@ -10,9 +10,9 @@
  * @access private
  */
 const buildFoil2d = (opts) => {
-    const { union } = lib.booleans
-    const { rotate, align } = lib.transforms
-    const { circle } = lib.primitives
+    const { union } = opts.lib.booleans
+    const { rotate, align } = opts.lib.transforms
+    const { circle } = opts.lib.primitives
 
     // console.log(opts);
     // const containerCircle = circle({ radius: opts.radius });
@@ -70,11 +70,11 @@ const buildFoil2d = (opts) => {
  * @access private
  */
 const buildFoil3d = (opts) => {
-    const { measureBoundingBox } = lib.measurements
-    const { extrudeRotate } = lib.extrusions
-    const { union, subtract, scission } = lib.booleans
-    const { translate, mirror, rotate, align } = lib.transforms
-    const { cuboid, rectangle } = lib.primitives
+    const { measureBoundingBox } = opts.lib.measurements
+    const { extrudeRotate } = opts.lib.extrusions
+    const { union, subtract, scission } = opts.lib.booleans
+    const { translate, mirror, rotate, align } = opts.lib.transforms
+    const { cuboid, rectangle } = opts.lib.primitives
 
     console.log(opts);
     // const containerCircle = circle({ radius: opts.radius });

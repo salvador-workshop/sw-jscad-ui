@@ -18,8 +18,8 @@ module.exports = {
    * @param {number} opts.notchRadius - radius of circular notch
    */
   sqCornerCircNotch: (opts) => {
-    const { square, circle } = lib.primitives
-    const { union, subtract } = lib.booleans
+    const { square, circle } = opts.lib.primitives
+    const { union, subtract } = opts.lib.booleans
 
     // TODO - fix implementation. Everything assumes that cornerRad === sqLen / 4.
     // So the bounding square probably would be off if it's changed.
@@ -48,8 +48,8 @@ module.exports = {
    * @param {number} opts.cornerRadius - radius of circular corner
    */
   sqCornerCircles: (opts) => {
-    const { square, circle } = lib.primitives
-    const { union } = lib.booleans
+    const { square, circle } = opts.lib.primitives
+    const { union } = opts.lib.booleans
 
     // TODO - fix implementation. Everything assumes that cornerRad === baseSqLen / 4.
     // So the bounding square probably would be off if it's changed.
@@ -79,9 +79,9 @@ module.exports = {
    * @param {number} opts.sqLength - side length for bounding square 
    */
   octagonal: (opts) => {
-    const { rotate } = lib.transforms
-    const { square } = lib.primitives
-    const { intersect } = lib.booleans
+    const { rotate } = opts.lib.transforms
+    const { square } = opts.lib.primitives
+    const { intersect } = opts.lib.booleans
 
     const sqLen = opts.sqLength;
     // const octagonSideLen = Math.tan(Math.PI / 8) * (sqLen / 2) * 2;
@@ -108,9 +108,9 @@ module.exports = {
      * @param {number} opts.smallOffset - small offset between notch and main edge
      */
     circNotch: (opts) => {
-      const { square, circle, rectangle } = lib.primitives
-      const { union, subtract } = lib.booleans
-      const { align } = lib.transforms
+      const { square, circle, rectangle } = opts.lib.primitives
+      const { union, subtract } = opts.lib.booleans
+      const { align } = opts.lib.transforms
 
       const ornamentThickness = opts.totalThickness - opts.topThickness;
       const smallOffset = opts.smallOffset || ornamentThickness / 6;
@@ -150,9 +150,9 @@ module.exports = {
      * @param {number} opts.smallOffset - small offset between portrusion and main edge
      */
     circPortrusion: (opts) => {
-      const { square, circle, rectangle } = lib.primitives
-      const { union, subtract, intersect } = lib.booleans
-      const { align, translate } = lib.transforms
+      const { square, circle, rectangle } = opts.lib.primitives
+      const { union, subtract, intersect } = opts.lib.booleans
+      const { align, translate } = opts.lib.transforms
 
       const ornamentThickness = opts.totalThickness - opts.topThickness;
       const smallOffset = opts.smallOffset || ornamentThickness / 8;

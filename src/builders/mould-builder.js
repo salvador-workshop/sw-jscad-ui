@@ -10,11 +10,11 @@
  *     base cuboid ('top' | 'middle' | 'bottom'). Defaults to 'middle'
  */
 const cuboidOneEdge = (opts) => {
-  const { measureBoundingBox } = lib.measurements
-  const { extrudeLinear } = lib.extrusions
-  const { union } = lib.booleans
-  const { rotate, align } = lib.transforms
-  const { cuboid } = lib.primitives
+  const { measureBoundingBox } = opts.lib.measurements
+  const { extrudeLinear } = opts.lib.extrusions
+  const { union } = opts.lib.booleans
+  const { rotate, align } = opts.lib.transforms
+  const { cuboid } = opts.lib.primitives
 
   const profileBbox = measureBoundingBox(opts.geomProfile);
   const profileSize = [profileBbox[1][0] - profileBbox[0][0], profileBbox[1][1] - profileBbox[0][1]];
@@ -44,18 +44,18 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
   cuboidEdge: (opts) => {
-    const { union, intersect } = lib.booleans
-    const { rotate, align, mirror } = lib.transforms
+    const { union, intersect } = opts.lib.booleans
+    const { rotate, align, mirror } = opts.lib.transforms
 
 
     // // X axis
     const xHalfSize = [opts.size[0] / 2, opts.size[1], opts.size[2]];
-    const xHalfBlock = align({ modes: ['min', 'center', 'none'] }, cuboidOneEdge({ size: xHalfSize, geomProfile: opts.geomProfile }));
+    const xHalfBlock = align({ modes: ['min', 'center', 'none'] }, cuboidOneEdge({ lib: opts.lib, size: xHalfSize, geomProfile: opts.geomProfile }));
     const xBlock = union(xHalfBlock, mirror({ normal: [1, 0, 0] }, xHalfBlock));
 
     // // Y axis
     const yHalfSize = [opts.size[0], opts.size[1] / 2, opts.size[2]];
-    const yHalfBlock = rotate([0, 0, Math.PI / -2], cuboidOneEdge({ size: yHalfSize, geomProfile: opts.geomProfile }));
+    const yHalfBlock = rotate([0, 0, Math.PI / -2], cuboidOneEdge({ lib: opts.lib, size: yHalfSize, geomProfile: opts.geomProfile }));
     const yHalfBlockAdj = align({ modes: ['center', 'max', 'none'] }, yHalfBlock);
     const yBlock = union(yHalfBlockAdj, mirror({ normal: [0, 1, 0] }, yHalfBlockAdj));
 
@@ -71,14 +71,14 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
   polygonalEdge: (opts) => {
-    const { union, subtract } = lib.booleans
-    const { rotate, align } = lib.transforms
-    const { cuboid, cylinder } = lib.primitives
+    const { union, subtract } = opts.lib.booleans
+    const { rotate, align } = opts.lib.transforms
+    const { cuboid, cylinder } = opts.lib.primitives
 
     const sideLength = opts.radius * 1.25;
     const circumradius = opts.radius / Math.cos(Math.PI / opts.numSides);
 
-    const block = cuboidOneEdge({ size: [opts.radius, sideLength, opts.height], geomProfile: opts.geomProfile });
+    const block = cuboidOneEdge({ lib: opts.lib, size: [opts.radius, sideLength, opts.height], geomProfile: opts.geomProfile });
     const adjustedBlock = align({ modes: ['min', 'center', 'none'] }, block);
     const mouldBlock = align({ modes: ['min', 'center', 'none'] }, cuboid({ size: [circumradius + 1, sideLength, opts.height] }));
     const mould = subtract(mouldBlock, adjustedBlock);
@@ -105,11 +105,11 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
   circularEdge: (opts) => {
-    const { measureBoundingBox } = lib.measurements
-    const { extrudeRotate } = lib.extrusions
-    const { union } = lib.booleans
-    const { translate } = lib.transforms
-    const { cylinder } = lib.primitives
+    const { measureBoundingBox } = opts.lib.measurements
+    const { extrudeRotate } = opts.lib.extrusions
+    const { union } = opts.lib.booleans
+    const { translate } = opts.lib.transforms
+    const { cylinder } = opts.lib.primitives
 
     const profileBbox = measureBoundingBox(opts.geomProfile);
     const profileSize = [profileBbox[1][0] - profileBbox[0][0], profileBbox[1][1] - profileBbox[0][1]];

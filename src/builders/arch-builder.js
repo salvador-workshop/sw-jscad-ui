@@ -15,10 +15,10 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   onePt: (opts) => {
-    const { path2, geom2 } = lib.geometries
-    const { extrudeRotate } = lib.extrusions
-    const { arc } = lib.primitives
-    const { translate, rotate, align } = lib.transforms
+    const { path2, geom2 } = opts.lib.geometries
+    const { extrudeRotate } = opts.lib.extrusions
+    const { arc } = opts.lib.primitives
+    const { translate, rotate, align } = opts.lib.transforms
 
     const arcRad = opts.arcRadius;
 
@@ -44,11 +44,11 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   twoPt: (opts) => {
-    const { path2, geom2 } = lib.geometries
-    const { extrudeRotate } = lib.extrusions
-    const { cuboid, arc } = lib.primitives
-    const { translate, mirror, rotate, align } = lib.transforms
-    const { union, subtract, intersect } = lib.booleans
+    const { path2, geom2 } = opts.lib.geometries
+    const { extrudeRotate } = opts.lib.extrusions
+    const { cuboid, arc } = opts.lib.primitives
+    const { translate, mirror, rotate, align } = opts.lib.transforms
+    const { union, subtract, intersect } = opts.lib.booleans
 
     const arcRad = opts.arcRadius;
     const archWth = opts.archWidth;

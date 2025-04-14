@@ -1,9 +1,4 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { align, translate } = jscad.transforms
-const { union, subtract, intersect } = jscad.booleans
-const { square, circle, rectangle } = jscad.primitives
-const { rotate } = jscad.transforms
 
 const EDGE_PROFILE_MARGIN = 1;
 
@@ -23,6 +18,9 @@ module.exports = {
    * @param {number} opts.notchRadius - radius of circular notch
    */
   sqCornerCircNotch: (opts) => {
+    const { square, circle } = lib.primitives
+    const { union, subtract } = lib.booleans
+
     // TODO - fix implementation. Everything assumes that cornerRad === sqLen / 4.
     // So the bounding square probably would be off if it's changed.
     const sqLen = opts.sqLength;
@@ -50,6 +48,9 @@ module.exports = {
    * @param {number} opts.cornerRadius - radius of circular corner
    */
   sqCornerCircles: (opts) => {
+    const { square, circle } = lib.primitives
+    const { union } = lib.booleans
+
     // TODO - fix implementation. Everything assumes that cornerRad === baseSqLen / 4.
     // So the bounding square probably would be off if it's changed.
     const sqLen = opts.sqLength;
@@ -78,6 +79,10 @@ module.exports = {
    * @param {number} opts.sqLength - side length for bounding square 
    */
   octagonal: (opts) => {
+    const { rotate } = lib.transforms
+    const { square } = lib.primitives
+    const { intersect } = lib.booleans
+
     const sqLen = opts.sqLength;
     // const octagonSideLen = Math.tan(Math.PI / 8) * (sqLen / 2) * 2;
 
@@ -103,6 +108,10 @@ module.exports = {
      * @param {number} opts.smallOffset - small offset between notch and main edge
      */
     circNotch: (opts) => {
+      const { square, circle, rectangle } = lib.primitives
+      const { union, subtract } = lib.booleans
+      const { align } = lib.transforms
+
       const ornamentThickness = opts.totalThickness - opts.topThickness;
       const smallOffset = opts.smallOffset || ornamentThickness / 6;
       const notchRadius = ornamentThickness - (smallOffset * 2);
@@ -141,6 +150,10 @@ module.exports = {
      * @param {number} opts.smallOffset - small offset between portrusion and main edge
      */
     circPortrusion: (opts) => {
+      const { square, circle, rectangle } = lib.primitives
+      const { union, subtract, intersect } = lib.booleans
+      const { align, translate } = lib.transforms
+
       const ornamentThickness = opts.totalThickness - opts.topThickness;
       const smallOffset = opts.smallOffset || ornamentThickness / 8;
       const circRadius = ornamentThickness - (smallOffset * 3);

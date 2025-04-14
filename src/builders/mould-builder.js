@@ -1,10 +1,4 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { cuboid, cylinder } = jscad.primitives
-const { rotate, align, mirror, translate } = jscad.transforms
-const { union, intersect, subtract } = jscad.booleans
-const { extrudeLinear, extrudeRotate } = jscad.extrusions
-const { measureBoundingBox } = jscad.measurements
 
 /**
  * Builds a cuboid with given 2D profile placed on one edge.
@@ -16,6 +10,12 @@ const { measureBoundingBox } = jscad.measurements
  *     base cuboid ('top' | 'middle' | 'bottom'). Defaults to 'middle'
  */
 const cuboidOneEdge = (opts) => {
+  const { measureBoundingBox } = lib.measurements
+  const { extrudeLinear } = lib.extrusions
+  const { union } = lib.booleans
+  const { rotate, align } = lib.transforms
+  const { cuboid } = lib.primitives
+
   const profileBbox = measureBoundingBox(opts.geomProfile);
   const profileSize = [profileBbox[1][0] - profileBbox[0][0], profileBbox[1][1] - profileBbox[0][1]];
 
@@ -44,6 +44,10 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
   cuboidEdge: (opts) => {
+    const { union, intersect } = lib.booleans
+    const { rotate, align, mirror } = lib.transforms
+
+
     // // X axis
     const xHalfSize = [opts.size[0] / 2, opts.size[1], opts.size[2]];
     const xHalfBlock = align({ modes: ['min', 'center', 'none'] }, cuboidOneEdge({ size: xHalfSize, geomProfile: opts.geomProfile }));
@@ -67,6 +71,10 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
   polygonalEdge: (opts) => {
+    const { union, subtract } = lib.booleans
+    const { rotate, align } = lib.transforms
+    const { cuboid, cylinder } = lib.primitives
+
     const sideLength = opts.radius * 1.25;
     const circumradius = opts.radius / Math.cos(Math.PI / opts.numSides);
 
@@ -97,6 +105,12 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
    */
   circularEdge: (opts) => {
+    const { measureBoundingBox } = lib.measurements
+    const { extrudeRotate } = lib.extrusions
+    const { union } = lib.booleans
+    const { translate } = lib.transforms
+    const { cylinder } = lib.primitives
+
     const profileBbox = measureBoundingBox(opts.geomProfile);
     const profileSize = [profileBbox[1][0] - profileBbox[0][0], profileBbox[1][1] - profileBbox[0][1]];
     const baseCylRad = opts.radius - profileSize[0];

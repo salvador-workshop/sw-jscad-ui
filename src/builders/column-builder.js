@@ -1,10 +1,4 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { union, subtract } = jscad.booleans
-const { cuboid, cylinder, roundedCylinder } = jscad.primitives
-const { measureBoundingBox } = jscad.measurements
-const { align } = jscad.transforms
-const { extrudeLinear } = jscad.extrusions
 
 /**
  * Simple cuboid
@@ -14,6 +8,8 @@ const { extrudeLinear } = jscad.extrusions
  * @param {number} opts.radius - element radius
  */
 const colCuboid = (opts) => {
+  const { cuboid } = lib.primitives
+
   return cuboid({ size: [opts.radius * 2, opts.radius * 2, opts.height] });
 }
 
@@ -25,6 +21,8 @@ const colCuboid = (opts) => {
  * @param {number} opts.radius - element radius
  */
 const colCylinder = (opts) => {
+  const { cylinder } = lib.primitives
+
   return cylinder({ radius: opts.radius, height: opts.height });
 }
 
@@ -37,6 +35,10 @@ const colCylinder = (opts) => {
  * @param {number} opts.roundRadius - radius of cylinder edge
  */
 const capRdCylinder = (opts) => {
+  const { align } = lib.transforms
+  const { cuboid, roundedCylinder } = lib.primitives
+  const { subtract } = lib.booleans
+
   const rdRadius = opts.roundRadius || 0.75;
   const baseShape = roundedCylinder({ radius: opts.radius, height: opts.height * 2, roundRadius: rdRadius });
   const cutBlock = align(
@@ -56,6 +58,10 @@ const capRdCylinder = (opts) => {
  * @param {number} opts.roundRadius - radius of cylinder edge
  */
 const baseRdCylinder = (opts) => {
+  const { align } = lib.transforms
+  const { cuboid, roundedCylinder } = lib.primitives
+  const { subtract } = lib.booleans
+
   const rdRadius = opts.roundRadius || 1;
   const baseShape = roundedCylinder({ radius: opts.radius, height: opts.height * 2, roundRadius: rdRadius });
   const cutBlock = align(
@@ -74,6 +80,8 @@ const baseRdCylinder = (opts) => {
  * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
  */
 const colExtrude = (opts) => {
+  const { extrudeLinear } = lib.extrusions
+
   return extrudeLinear({ height: opts.height }, opts.geomProfile);
 }
 
@@ -121,6 +129,10 @@ module.exports = {
    * @param {number} opts.height - total height of column
    */
   threePt: (opts) => {
+    const { align } = lib.transforms
+    const { measureBoundingBox } = lib.measurements
+    const { union } = lib.booleans
+
     const baseStyle = opts.base[0];
     const shaftStyle = opts.shaft[0];
     const capitalStyle = opts.capital[0];

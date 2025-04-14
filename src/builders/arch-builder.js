@@ -1,11 +1,5 @@
 
 "use strict"
-const jscad = require('@jscad/modeling')
-const { union, subtract, intersect } = jscad.booleans
-const { translate, mirror, rotate, align } = jscad.transforms
-const { cuboid, arc } = jscad.primitives
-const { extrudeRotate } = jscad.extrusions
-const { path2, geom2 } = jscad.geometries
 
 /**
  * Builds circle-based arches. Input 2D profiles must be centred at (0, 0, 0)
@@ -21,6 +15,11 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   onePt: (opts) => {
+    const { path2, geom2 } = lib.geometries
+    const { extrudeRotate } = lib.extrusions
+    const { arc } = lib.primitives
+    const { translate, rotate, align } = lib.transforms
+
     const arcRad = opts.arcRadius;
 
     if (opts.geomProfile) {
@@ -45,6 +44,12 @@ module.exports = {
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   twoPt: (opts) => {
+    const { path2, geom2 } = lib.geometries
+    const { extrudeRotate } = lib.extrusions
+    const { cuboid, arc } = lib.primitives
+    const { translate, mirror, rotate, align } = lib.transforms
+    const { union, subtract, intersect } = lib.booleans
+
     const arcRad = opts.arcRadius;
     const archWth = opts.archWidth;
 

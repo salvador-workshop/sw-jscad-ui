@@ -1,10 +1,4 @@
 "use strict"
-const jscad = require('@jscad/modeling')
-const { circle, cuboid, rectangle } = jscad.primitives
-const { translate, mirror, rotate, align } = jscad.transforms
-const { union, subtract, scission } = jscad.booleans
-const { extrudeRotate } = jscad.extrusions
-const { measureBoundingBox } = jscad.measurements
 
 /**
  * Builds a 2D n-foil opening
@@ -16,6 +10,10 @@ const { measureBoundingBox } = jscad.measurements
  * @access private
  */
 const buildFoil2d = (opts) => {
+    const { union } = lib.booleans
+    const { rotate, align } = lib.transforms
+    const { circle } = lib.primitives
+
     // console.log(opts);
     // const containerCircle = circle({ radius: opts.radius });
     const centralAngle = Math.PI * 2 / opts.numLobes;
@@ -72,6 +70,12 @@ const buildFoil2d = (opts) => {
  * @access private
  */
 const buildFoil3d = (opts) => {
+    const { measureBoundingBox } = lib.measurements
+    const { extrudeRotate } = lib.extrusions
+    const { union, subtract, scission } = lib.booleans
+    const { translate, mirror, rotate, align } = lib.transforms
+    const { cuboid, rectangle } = lib.primitives
+
     console.log(opts);
     // const containerCircle = circle({ radius: opts.radius });
     const centralAngle = Math.PI * 2 / opts.numLobes;

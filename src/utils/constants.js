@@ -1,0 +1,2 @@
+const INCHES_MM_FACTOR = 25.4;
+const GRIDFINITY_UNIT = 42;

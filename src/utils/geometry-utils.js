@@ -1,5 +1,14 @@
 "use strict"
 
+/**
+ * TODO
+ * + regPolygon
+ *     - sideLength()
+ *     - apothem()
+ *     - circumradius()
+ *     - interiorAngle()
+ */
+
 const _arrCartesianProduct = (a, b) => a.reduce((acc, x) => [...acc, ...b.map(y => [x, y])], []);
 
 const geometryUtils = {

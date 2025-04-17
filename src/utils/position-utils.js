@@ -1,7 +1,12 @@
 "use strict"
 
 const positionUtils = {
-    yerr: () => { return null }
+    /**
+     * Formats bounding box info in a more readable manner, like `{ size: { x: 99, y: 99, z: 99 }, min: { ... }, max: { ... } }`
+     */
+    boundingBoxInfo: (boundingBox) => {
+
+    }
 }
 
 module.exports = positionUtils;

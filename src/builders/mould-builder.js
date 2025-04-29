@@ -54,44 +54,11 @@ const mouldBuilderInit = (jscadInstance) => {
       return intersect(xBlock, yBlock);
     },
     /**
-     * Positive moulding for a polygonal prism with the given 2D profile placed onto all the side edges.
-     * @param {Object} opts
-     * @param {number} opts.numSides - number of sides in prism
-     * @param {number} opts.radius - prism radius (apothem). Distance from centre to midpoint of side
-     * @param {number} opts.height - prism height.
-     * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
-     */
-    polygonalEdge: (opts) => {
-      const { union, subtract } = jscadInstance.booleans
-      const { rotate, align } = jscadInstance.transforms
-      const { cuboid, cylinder } = jscadInstance.primitives
-
-      const sideLength = opts.radius * 1.25;
-      const circumradius = opts.radius / Math.cos(Math.PI / opts.numSides);
-
-      const block = cuboidOneEdge({ lib: jscadInstance, size: [opts.radius, sideLength, opts.height], geomProfile: opts.geomProfile });
-      const adjustedBlock = align({ modes: ['min', 'center', 'none'] }, block);
-      const mouldBlock = align({ modes: ['min', 'center', 'none'] }, cuboid({ size: [circumradius + 1, sideLength, opts.height] }));
-      const mould = subtract(mouldBlock, adjustedBlock);
-
-      const centralAngle = Math.PI * 2 / opts.numSides;
-      const rotationAngles = [];
-      for (let index = 1; index < opts.numSides; index++) {
-        rotationAngles.push(centralAngle * index);
-      }
-      const rotatedMoulds = rotationAngles.map(angle => {
-        return rotate([0, 0, angle], mould);
-      })
-      const finalMould = union(mould, ...rotatedMoulds);
-      const blank = cylinder({ radius: circumradius, height: opts.height });
-
-      return subtract(blank, finalMould)
-    },
-    /**
      * Positive moulding for a cylinder with the given 2D profile placed onto the edge.
      * @param {Object} opts
      * @param {number} opts.radius - Cylinder radius.
      * @param {number} opts.height - Cylinder height.
+     * @param {number} opts.segments - Cylinder height.
      * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
      */
     circularEdge: (opts) => {
@@ -108,7 +75,7 @@ const mouldBuilderInit = (jscadInstance) => {
       const baseCyl = cylinder({ radius: baseCylRad + 0.05, height: opts.height });
 
       const adjProfile = translate([baseCylRad + profileSize[0] / 2], opts.geomProfile);
-      const edgeMoulding = extrudeRotate({ segments: 48 }, adjProfile);
+      const edgeMoulding = extrudeRotate({ segments: opts.segments || 48 }, adjProfile);
 
       return union(baseCyl, edgeMoulding);
     },

@@ -1,9 +1,11 @@
 const buildersModule = require('./builders');
 const utilsModule = require('./utils');
 
-const swjscad = {
-    builders: buildersModule,
-    utils: utilsModule,
+const buildSwJsCad = (jscadInstance) => {
+    return {
+        ...buildersModule(jscadInstance),
+        ...utilsModule(jscadInstance),
+    }
 }
 
-module.exports = swjscad;
+module.exports = buildSwJsCad;

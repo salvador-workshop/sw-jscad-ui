@@ -1,10 +1,10 @@
-const buildUtils = (jscadInstance) => {
+const init = (jscadInstance) => {
     return {
         generalUtils: require('./general-utils'),
         geometryUtils: require('./geometry-utils'),
-        positionUtils: require('./position-utils')(jscadInstance),
-        textUtils: require('./text-utils')(jscadInstance),
-        transformUtils: require('./transform-utils')(jscadInstance),
+        positionUtils: require('./position-utils').init(jscadInstance),
+        textUtils: require('./text-utils').init(jscadInstance),
+        transformUtils: require('./transform-utils').init(jscadInstance),
     }
 }
 
@@ -14,4 +14,4 @@ const buildUtils = (jscadInstance) => {
  * @example
  * const { geometryUtils, positionUtils } = require('sw-jscad')
  */
-module.exports = buildUtils;
+module.exports = { init };

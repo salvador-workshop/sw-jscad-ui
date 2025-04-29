@@ -1,6 +1,6 @@
 "use strict"
 
-const mouldBuilder = (jscadInstance) => {
+const mouldBuilderInit = (jscadInstance) => {
   /**
    * Builds a cuboid with given 2D profile placed on one edge.
    * @param {Object} opts
@@ -147,4 +147,4 @@ const mouldBuilder = (jscadInstance) => {
  * @module mouldBuilder
  * @version 1.0.0
  */
-module.exports = mouldBuilder
+module.exports = { init: mouldBuilderInit }

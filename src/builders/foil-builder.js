@@ -1,6 +1,6 @@
 "use strict"
 
-const foilBuilder = (jscadInstance) => {
+const foilBuilderInit = (jscadInstance) => {
 
     /**
      * Builds a 2D n-foil opening
@@ -230,4 +230,4 @@ const foilBuilder = (jscadInstance) => {
  * @module foilBuilder
  * @version 2.0.0
  */
-module.exports = foilBuilder;
+module.exports = { init: foilBuilderInit };

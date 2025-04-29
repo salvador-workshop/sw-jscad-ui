@@ -1,10 +1,10 @@
-const buildBuilders = (jscadInstance) => {
+const init = (jscadInstance) => {
     return {
-        archBuilder: require('./arch-builder')(jscadInstance),
-        columnBuilder: require('./column-builder')(jscadInstance),
-        foilBuilder: require('./foil-builder')(jscadInstance),
-        mouldBuilder: require('./mould-builder')(jscadInstance),
-        profileBuilder: require('./profile-builder')(jscadInstance),
+        archBuilder: require('./arch-builder').init(jscadInstance),
+        columnBuilder: require('./column-builder').init(jscadInstance),
+        foilBuilder: require('./foil-builder').init(jscadInstance),
+        mouldBuilder: require('./mould-builder').init(jscadInstance),
+        profileBuilder: require('./profile-builder').init(jscadInstance),
     }
 }
 
@@ -14,4 +14,4 @@ const buildBuilders = (jscadInstance) => {
  * @example
  * const { archBuilder, columnBuilder } = require('sw-jscad').builders
  */
-module.exports = buildBuilders;
+module.exports = { init };

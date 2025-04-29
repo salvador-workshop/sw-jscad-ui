@@ -1,6 +1,6 @@
 "use strict"
 
-const transformUtils = (jscadInstance) => {
+const transformUtilsInit = (jscadInstance) => {
     return {
         /**
          * Cuts a given geometry in half.
@@ -25,4 +25,4 @@ const transformUtils = (jscadInstance) => {
         }
     }
 }
-module.exports = transformUtils;
+module.exports = { init: transformUtilsInit };

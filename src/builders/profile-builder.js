@@ -2,7 +2,7 @@
 
 const EDGE_PROFILE_MARGIN = 1;
 
-const profileBuilder = (jscadInstance) => {
+const profileBuilderInit = (jscadInstance) => {
 
   /**
    * Builds cross-section profiles in gothic style.
@@ -193,4 +193,4 @@ const profileBuilder = (jscadInstance) => {
  * @module profileBuilder
  * @version 2.0.0
  */
-module.exports = profileBuilder
+module.exports = { init: profileBuilderInit }

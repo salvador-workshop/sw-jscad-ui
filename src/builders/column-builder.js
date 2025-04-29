@@ -1,6 +1,6 @@
 "use strict"
 
-const columnBuilder = (jscadInstance) => {
+const columnBuilderInit = (jscadInstance) => {
   /**
    * Simple cuboid
    * @param {Object} opts
@@ -164,4 +164,4 @@ const columnBuilder = (jscadInstance) => {
  * @module columnBuilder
  * @version 3.0.0
  */
-module.exports = columnBuilder;
+module.exports = { init: columnBuilderInit };

@@ -1,7 +1,7 @@
 
 "use strict"
 
-const archBuilder = (jscadInstance) => {
+const archBuilderInit = (jscadInstance) => {
   return {
     /**
      * Builds a one-centre (semicircular) arch.
@@ -104,4 +104,4 @@ const archBuilder = (jscadInstance) => {
  * @module archBuilder
  * @version 2.0.0
  */
-module.exports = archBuilder
+module.exports = { init: archBuilderInit }

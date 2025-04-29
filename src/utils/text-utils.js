@@ -1,6 +1,6 @@
 "use strict"
 
-const textUtils = (jscadInstance) => {
+const textUtilsInit = (jscadInstance) => {
     return {
         flatText: (opts) => {
             const { union } = jscadInstance.booleans
@@ -32,4 +32,4 @@ const textUtils = (jscadInstance) => {
     }
 }
 
-module.exports = textUtils;
+module.exports = { init: textUtilsInit };

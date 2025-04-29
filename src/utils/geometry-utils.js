@@ -52,10 +52,27 @@ const geometryUtils = {
         return allPoints.map(pt => { return { x: pt[0], y: pt[1] } });
     },
     regPoly: {
-        sideLength: () => {},
-        apothem: () => {},
-        circumradius: () => {},
-        interiorAngle: () => {},
+        sideLengthFromApothem: (apothem, numSides) => {
+            return apothem * 2 * Math.tan(Math.PI / numSides);
+        },
+        sideLengthFromCircumRadius: (circumradius, numSides) => {
+            return circumradius * 2 * Math.sin(Math.PI / numSides);
+        },
+        apothemFromCircumradius: (circumradius, numSides) => {
+            return circumradius * Math.cos(Math.PI / numSides)
+        },
+        apothemFromSideLength: (sideLength, numSides) => {
+            return sideLength / 2 * Math.tan(Math.PI / numSides)
+        },
+        circumradiusFromApothem: (apothem, numSides) => {
+            return apothem / Math.cos(Math.PI / numSides);
+        },
+        circumradiusFromSideLength: (sideLength, numSides) => {
+            return sideLength / 2 * Math.sin(Math.PI / numSides)
+        },
+        interiorAngle: (numSides) => {
+            return 2 * Math.PI / numSides;
+        },
     }
 }
 

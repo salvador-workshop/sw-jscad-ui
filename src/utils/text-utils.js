@@ -1,33 +1,63 @@
 "use strict"
 
+const DEFAULT_EXTRUDE_HEIGHT = 1;
+const DEFAULT_PANEL_HEIGHT = 2;
+
 const textUtilsInit = (jscadInstance) => {
+    const flatText = (opts) => {
+        const { union } = jscadInstance.booleans
+        const { circle } = jscadInstance.primitives
+        const { translate, align } = jscadInstance.transforms
+        const { vectorText } = jscadInstance.text
+        const { hullChain } = jscadInstance.hulls
+        const { extrudeLinear } = jscadInstance.extrusions
+
+        if (opts.message === undefined || opts.message.length === 0) return []
+
+        const lineRadius = opts.charLineWidth / 2
+        const lineCorner = circle({ radius: lineRadius })
+
+        const lineSegmentPointArrays = vectorText({ x: 0, y: 0, input: opts.message, height: opts.fontSize }) // line segments for each character
+        const lineSegments = []
+        lineSegmentPointArrays.forEach((segmentPoints) => { // process the line segment
+            const corners = segmentPoints.map((point) => translate(point, lineCorner))
+            lineSegments.push(hullChain(corners))
+        })
+        const message2D = union(lineSegments)
+        const message3D = extrudeLinear({ height: opts.extrudeHeight || DEFAULT_EXTRUDE_HEIGHT }, message2D)
+        return align({ modes: ['center', 'center', 'center'] }, message3D)
+    }
+
     return {
-        flatText: (opts) => {
-            const { union } = jscadInstance.booleans
-            const { circle } = jscadInstance.primitives
-            const { translate, } = jscadInstance.transforms
-            const { vectorText } = jscadInstance.text
-            const { hullChain } = jscadInstance.hulls
-            const { extrudeLinear } = jscadInstance.extrusions
+        flatText,
+        textPanel: (opts) => {
+            const { subtract } = jscadInstance.booleans
+            const { cuboid } = jscadInstance.primitives
+            const { measureDimensions, measureBoundingBox } = jscadInstance.measurements;
+            const { align } = jscadInstance.transforms
+            const extrudeHt = opts.extrudeHeight || DEFAULT_EXTRUDE_HEIGHT;
 
-            // message, fontSize, extrudeHeight, opts.charLineWidth
-            if (opts.message === undefined || opts.message.length === 0) return []
+            const textModel = flatText({
+                ...opts,
+                extrudeHeight: extrudeHt,
+            });
+            const textModelDims = measureDimensions(textModel);
+            const panelOffset = opts.panelOffset || 2;
 
-            const lineRadius = opts.charLineWidth / 2
-            const lineCorner = circle({ radius: lineRadius })
-
-            const lineSegmentPointArrays = vectorText({ x: 0, y: 0, input: opts.message, height: opts.fontSize }) // line segments for each character
-            const lineSegments = []
-            lineSegmentPointArrays.forEach((segmentPoints) => { // process the line segment
-                const corners = segmentPoints.map((point) => translate(point, lineCorner))
-                lineSegments.push(hullChain(corners))
+            const textPanel = cuboid({
+                size: [
+                    textModelDims[0] + panelOffset,
+                    textModelDims[1] + panelOffset,
+                    opts.panelThickness || extrudeHt * 2
+                ]
             })
-            const message2D = union(lineSegments)
-            const message3D = extrudeLinear({ height: opts.extrudeHeight }, message2D)
-            return translate([0, 0, 0], message3D)
-        },
-        textPanel: () => {
-            return null;
+
+            const embossedPanel = subtract(
+                align({ modes: ['center', 'center', 'max'] }, textPanel),
+                align({ modes: ['center', 'center', 'max'] }, textModel)
+            )
+
+            return embossedPanel;
         }
     }
 }

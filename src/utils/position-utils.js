@@ -3,10 +3,18 @@
 const positionUtilsInit = (jscadInstance) => {
     return {
         /**
-         * Formats bounding box info in a more readable manner, like `{ size: { x: 99, y: 99, z: 99 }, min: { ... }, max: { ... } }`
+         * Measures key info, and presents it in a readable manner, like `{ size: { x: 99, y: 99, z: 99 }, min: { ... }, max: { ... } }`
          */
-        boundingBoxInfo: (boundingBox) => {
+        measure: (inputGeom) => {
+            const {
+                measureDimensions,
+                measureBoundingBox,
+            } = jscadInstance.measurements
 
+            return {
+                boundingBox: measureBoundingBox(inputGeom),
+                dimensions: measureDimensions(inputGeom),
+            }
         }
     }
 }

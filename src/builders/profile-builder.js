@@ -4,14 +4,7 @@ const EDGE_PROFILE_MARGIN = 1;
 
 const profileBuilderInit = (jscadInstance) => {
 
-  /**
-   * Builds cross-section profiles in gothic style.
-   * Output profiles are centred at (0, 0, 0).
-   * Edge profiles have a 1mm margin between all details and the flat (host) side.
-   * @module profileBuilder
-   * @version 2.0.0
-   */
-  module.exports = {
+  return {
     /**
      * Square with circular notches at corners.
      * @param {Object} opts 

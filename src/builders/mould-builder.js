@@ -27,14 +27,7 @@ const mouldBuilderInit = (jscadInstance) => {
     return align({ modes: ['center', 'center', 'none'] }, union(baseBlock, alignedEdgeBlock));
   }
 
-  /**
-   * Builds positive mouldings and negative moulds for various ornaments.
-   * These would then be subtracted from a shape to produce the final result.
-   * Input 2D profiles must be centred at (0, 0, 0)
-   * @module mouldBuilder
-   * @version 1.0.0
-   */
-  module.exports = {
+  return {
     cuboidOneEdge,
     /**
      * Positive moulding for a cuboid with the given 2D profile placed onto all the side edges.

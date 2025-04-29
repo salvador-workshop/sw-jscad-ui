@@ -8,4 +8,6 @@ module.exports = {
     generalUtils: require('./general-utils'),
     geometryUtils: require('./geometry-utils'),
     positionUtils: require('./position-utils'),
+    textUtils: require('./text-utils'),
+    transformUtils: require('./transform-utils'),
 }

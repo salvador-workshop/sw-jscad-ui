@@ -50,6 +50,12 @@ const geometryUtils = {
         const allPoints = _arrCartesianProduct(allXCoords, allYCoords);
 
         return allPoints.map(pt => { return { x: pt[0], y: pt[1] } });
+    },
+    regPoly: {
+        sideLength: () => {},
+        apothem: () => {},
+        circumradius: () => {},
+        interiorAngle: () => {},
     }
 }
 

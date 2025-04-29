@@ -57,7 +57,7 @@ const textUtilsInit = (jscadInstance) => {
                 align({ modes: ['center', 'center', 'max'] }, textModel)
             )
 
-            return embossedPanel;
+            return align({ modes: ['center', 'center', 'center'] }, embossedPanel);
         }
     }
 }

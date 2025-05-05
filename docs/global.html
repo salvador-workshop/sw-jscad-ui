@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="baseRdCylinder"><span class="type-signature"></span>baseRdCylinder<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="bisect3d"><span class="type-signature"></span>bisect3d<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    Base round cylinder
+    Cuts a given geometry in half.
 </div>
 
 
@@ -190,7 +190,7 @@
 
         <tr>
             
-                <td class="name"><code>lib</code></td>
+                <td class="name"><code>geom</code></td>
             
 
             <td class="type">
@@ -206,20 +206,20 @@
 
             
 
-            <td class="description last">`@jscad/modeling` instance</td>
+            <td class="description last">Object we're cutting</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>height</code></td>
+                <td class="name"><code>axis</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
             
@@ -229,53 +229,7 @@
 
             
 
-            <td class="description last">element height</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>radius</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">element radius</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>roundRadius</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">radius of cylinder edge</td>
+            <td class="description last">Axis direction pointing to the remaining geometry. This could be negative, specified like "x" or "-y"</td>
         </tr>
 
     
@@ -323,7 +277,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_column-builder.js.html">builders/column-builder.js</a>, <a href="builders_column-builder.js.html#line60">line 60</a>
+        <a href="utils_transform-utils.js.html">utils/transform-utils.js</a>, <a href="utils_transform-utils.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -348,6 +302,16 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    bisected geometry
+</div>
+
+
+
+    
 
 
 
@@ -359,7 +323,7 @@
     
 
     
-    <h4 class="name" id="capRdCylinder"><span class="type-signature"></span>capRdCylinder<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="cinquefoil"><span class="type-signature"></span>cinquefoil<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -367,7 +331,7 @@
 
 
 <div class="description">
-    Simple round cylinder
+    Builds a cinquefoil opening using a given 2d cross-section profile
 </div>
 
 
@@ -445,52 +409,6 @@
 
         <tr>
             
-                <td class="name"><code>lib</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">`@jscad/modeling` instance</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">element height</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>radius</code></td>
             
 
@@ -507,20 +425,20 @@
 
             
 
-            <td class="description last">element radius</td>
+            <td class="description last">radius of container circle</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>roundRadius</code></td>
+                <td class="name"><code>lobeRadiusType</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
             
@@ -530,7 +448,53 @@
 
             
 
-            <td class="description last">radius of cylinder edge</td>
+            <td class="description last">"inSlice", "halfRadius", "mean"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D cross-section profile</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cutCentre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">if true, cuts a circular hole in centre of opening (only for 3D)</td>
         </tr>
 
     
@@ -578,7 +542,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_column-builder.js.html">builders/column-builder.js</a>, <a href="builders_column-builder.js.html#line37">line 37</a>
+        <a href="builders_foil-builder.js.html">builders/foil-builder.js</a>, <a href="builders_foil-builder.js.html#line179">line 179</a>
     </li></ul></dd>
     
 
@@ -614,7 +578,7 @@
     
 
     
-    <h4 class="name" id="colCuboid"><span class="type-signature"></span>colCuboid<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="circNotch"><span class="type-signature"></span>circNotch<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -622,7 +586,7 @@
 
 
 <div class="description">
-    Simple cuboid
+    Edge profile: Circular notch in bottom half
 </div>
 
 
@@ -700,30 +664,7 @@
 
         <tr>
             
-                <td class="name"><code>lib</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">`@jscad/modeling` instance</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
+                <td class="name"><code>totalThickness</code></td>
             
 
             <td class="type">
@@ -739,14 +680,14 @@
 
             
 
-            <td class="description last">element height</td>
+            <td class="description last">total thickness of edge</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>radius</code></td>
+                <td class="name"><code>topThickness</code></td>
             
 
             <td class="type">
@@ -762,7 +703,30 @@
 
             
 
-            <td class="description last">element radius</td>
+            <td class="description last">thickness of top (left intact by ornaments)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>smallOffset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">small offset between notch and main edge</td>
         </tr>
 
     
@@ -810,7 +774,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_column-builder.js.html">builders/column-builder.js</a>, <a href="builders_column-builder.js.html#line10">line 10</a>
+        <a href="builders_profile-builder.js.html">builders/profile-builder.js</a>, <a href="builders_profile-builder.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -846,7 +810,7 @@
     
 
     
-    <h4 class="name" id="colCylinder"><span class="type-signature"></span>colCylinder<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="circPortrusion"><span class="type-signature"></span>circPortrusion<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -854,7 +818,7 @@
 
 
 <div class="description">
-    Simple cylinder
+    Edge profile: Circular portrusion in bottom half
 </div>
 
 
@@ -932,30 +896,7 @@
 
         <tr>
             
-                <td class="name"><code>lib</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">`@jscad/modeling` instance</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
+                <td class="name"><code>totalThickness</code></td>
             
 
             <td class="type">
@@ -971,14 +912,14 @@
 
             
 
-            <td class="description last">element height</td>
+            <td class="description last">total thickness of edge</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>radius</code></td>
+                <td class="name"><code>topThickness</code></td>
             
 
             <td class="type">
@@ -994,7 +935,30 @@
 
             
 
-            <td class="description last">element radius</td>
+            <td class="description last">thickness of top (left intact by ornaments)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>smallOffset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">small offset between portrusion and main edge</td>
         </tr>
 
     
@@ -1042,7 +1006,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_column-builder.js.html">builders/column-builder.js</a>, <a href="builders_column-builder.js.html#line23">line 23</a>
+        <a href="builders_profile-builder.js.html">builders/profile-builder.js</a>, <a href="builders_profile-builder.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -1078,7 +1042,7 @@
     
 
     
-    <h4 class="name" id="colExtrude"><span class="type-signature"></span>colExtrude<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="circularEdge"><span class="type-signature"></span>circularEdge<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1086,7 +1050,7 @@
 
 
 <div class="description">
-    Simple extrude
+    Positive moulding for a cylinder with the given 2D profile placed onto the edge.
 </div>
 
 
@@ -1164,13 +1128,13 @@
 
         <tr>
             
-                <td class="name"><code>lib</code></td>
+                <td class="name"><code>radius</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -1180,7 +1144,7 @@
 
             
 
-            <td class="description last">`@jscad/modeling` instance</td>
+            <td class="description last">Cylinder radius.</td>
         </tr>
 
     
@@ -1203,7 +1167,1196 @@
 
             
 
-            <td class="description last">element height</td>
+            <td class="description last">Cylinder height.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>segments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cylinder height.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D positive cross-section profile</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_mould-builder.js.html">builders/mould-builder.js</a>, <a href="builders_mould-builder.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="cuboidEdge"><span class="type-signature"></span>cuboidEdge<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Positive moulding for a cuboid with the given 2D profile placed onto all the side edges.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">size (x, y, z)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D positive cross-section profile</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_mould-builder.js.html">builders/mould-builder.js</a>, <a href="builders_mould-builder.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="cutCircularSlice"><span class="type-signature"></span>cutCircularSlice<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Cuts a slice of an object
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>geom</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object we're cutting</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>centralAngle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_transform-utils.js.html">utils/transform-utils.js</a>, <a href="utils_transform-utils.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    bisected geometry
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="measure"><span class="type-signature"></span>measure<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Measures key info, and presents it in a readable manner, like `{ size: { x: 99, y: 99, z: 99 }, min: { ... }, max: { ... } }`
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_position-utils.js.html">utils/position-utils.js</a>, <a href="utils_position-utils.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="octagonal"><span class="type-signature"></span>octagonal<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Octagonal
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sqLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">side length for bounding square</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_profile-builder.js.html">builders/profile-builder.js</a>, <a href="builders_profile-builder.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="octofoil"><span class="type-signature"></span>octofoil<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Builds an octofoil opening using a given 2d cross-section profile
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">radius of container circle</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lobeRadiusType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"inSlice", "halfRadius", "mean"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D cross-section profile</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cutCentre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">if true, cuts a circular hole in centre of opening (only for 3D)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_foil-builder.js.html">builders/foil-builder.js</a>, <a href="builders_foil-builder.js.html#line209">line 209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="onePt"><span class="type-signature"></span>onePt<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Builds a one-centre (semicircular) arch.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arcRadius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">arc radius</td>
         </tr>
 
     
@@ -1274,7 +2427,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_column-builder.js.html">builders/column-builder.js</a>, <a href="builders_column-builder.js.html#line82">line 82</a>
+        <a href="builders_arch-builder.js.html">builders/arch-builder.js</a>, <a href="builders_arch-builder.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -1310,7 +2463,7 @@
     
 
     
-    <h4 class="name" id="cuboidOneEdge"><span class="type-signature"></span>cuboidOneEdge<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="quatrefoil"><span class="type-signature"></span>quatrefoil<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1318,7 +2471,7 @@
 
 
 <div class="description">
-    Builds a cuboid with given 2D profile placed on one edge.
+    Builds a quatrefoil opening using a given 2d cross-section profile
 </div>
 
 
@@ -1396,13 +2549,13 @@
 
         <tr>
             
-                <td class="name"><code>lib</code></td>
+                <td class="name"><code>radius</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -1412,20 +2565,20 @@
 
             
 
-            <td class="description last">`@jscad/modeling` instance</td>
+            <td class="description last">radius of container circle</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>size</code></td>
+                <td class="name"><code>lobeRadiusType</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;number></span>
+<span class="param-type">string</span>
 
 
             
@@ -1435,7 +2588,7 @@
 
             
 
-            <td class="description last">size (x, y, z)</td>
+            <td class="description last">"inSlice", "halfRadius", "mean"</td>
         </tr>
 
     
@@ -1458,20 +2611,20 @@
 
             
 
-            <td class="description last">2D positive cross-section profile</td>
+            <td class="description last">2D cross-section profile</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>alignment</code></td>
+                <td class="name"><code>cutCentre</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -1481,7 +2634,7 @@
 
             
 
-            <td class="description last">where to align when profile size differs from    base cuboid ('top' | 'middle' | 'bottom'). Defaults to 'middle'</td>
+            <td class="description last">if true, cuts a circular hole in centre of opening (only for 3D)</td>
         </tr>
 
     
@@ -1529,7 +2682,1863 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_mould-builder.js.html">builders/mould-builder.js</a>, <a href="builders_mould-builder.js.html#line12">line 12</a>
+        <a href="builders_foil-builder.js.html">builders/foil-builder.js</a>, <a href="builders_foil-builder.js.html#line164">line 164</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sexfoil"><span class="type-signature"></span>sexfoil<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Builds a sexfoil opening using a given 2d cross-section profile
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">radius of container circle</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lobeRadiusType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"inSlice", "halfRadius", "mean"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D cross-section profile</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cutCentre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">if true, cuts a circular hole in centre of opening (only for 3D)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_foil-builder.js.html">builders/foil-builder.js</a>, <a href="builders_foil-builder.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sqCornerCircNotch"><span class="type-signature"></span>sqCornerCircNotch<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Square with circular notches at corners.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sqLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">side length for bounding square</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>notchRadius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">radius of circular notch</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_profile-builder.js.html">builders/profile-builder.js</a>, <a href="builders_profile-builder.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sqCornerCircles"><span class="type-signature"></span>sqCornerCircles<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Square with circles at corners.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sqLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">side length for bounding square</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cornerRadius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">radius of circular corner</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_profile-builder.js.html">builders/profile-builder.js</a>, <a href="builders_profile-builder.js.html#line43">line 43</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sunkenPanelCirc"><span class="type-signature"></span>sunkenPanelCirc<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Negative mould for a circular sunken panel, to be placed on a wall/ceiling surface
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">panel radius</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D positive cross-section profile for edge</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_mould-builder.js.html">builders/mould-builder.js</a>, <a href="builders_mould-builder.js.html#line87">line 87</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sunkenPanelRect"><span class="type-signature"></span>sunkenPanelRect<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Negative mould for a rectangular sunken panel, to be placed on a wall/ceiling surface
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>edge</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">size (x, y)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D positive cross-section profile for edge</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_mould-builder.js.html">builders/mould-builder.js</a>, <a href="builders_mould-builder.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="threePt"><span class="type-signature"></span>threePt<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Builds a three-part column using the specified dimensions and styles.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>base</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;(string|number|geom2.Geom2|null)></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">specs for column base (style, height, radius, geomProfile)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>shaft</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;(string|number|geom2.Geom2|null)></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">specs for column shaft (style, radius, geomProfile)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>capital</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;(string|number|geom2.Geom2|null)></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">specs for column capital (style, height, radius, geomProfile)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">total height of column</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_column-builder.js.html">builders/column-builder.js</a>, <a href="builders_column-builder.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="trefoil"><span class="type-signature"></span>trefoil<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Builds a trefoil opening using a given 2d cross-section profile
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">radius of container circle</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lobeRadiusType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"inSlice", "halfRadius", "mean"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D cross-section profile</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cutCentre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">if true, cuts a circular hole in centre of opening (only for 3D)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_foil-builder.js.html">builders/foil-builder.js</a>, <a href="builders_foil-builder.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="twoPt"><span class="type-signature"></span>twoPt<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Builds a two-centre pointed arch.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arcRadius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">arc radius</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>archWidth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">arch width</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>profileWidth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">width of 2D cross-section profile</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>geomProfile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">geom2.Geom2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">2D cross-section profile</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="builders_arch-builder.js.html">builders/arch-builder.js</a>, <a href="builders_arch-builder.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -1575,13 +4584,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-archBuilder.html">archBuilder</a></li><li><a href="module-builders.html">builders</a></li><li><a href="module-columnBuilder.html">columnBuilder</a></li><li><a href="module-foilBuilder.html">foilBuilder</a></li><li><a href="module-mouldBuilder.html">mouldBuilder</a></li><li><a href="module-profileBuilder.html">profileBuilder</a></li><li><a href="module-utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#baseRdCylinder">baseRdCylinder</a></li><li><a href="global.html#capRdCylinder">capRdCylinder</a></li><li><a href="global.html#colCuboid">colCuboid</a></li><li><a href="global.html#colCylinder">colCylinder</a></li><li><a href="global.html#colExtrude">colExtrude</a></li><li><a href="global.html#cuboidOneEdge">cuboidOneEdge</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-archBuilder.html">archBuilder</a></li><li><a href="module-builders.html">builders</a></li><li><a href="module-columnBuilder.html">columnBuilder</a></li><li><a href="module-foilBuilder.html">foilBuilder</a></li><li><a href="module-mouldBuilder.html">mouldBuilder</a></li><li><a href="module-profileBuilder.html">profileBuilder</a></li><li><a href="module-utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bisect3d">bisect3d</a></li><li><a href="global.html#cinquefoil">cinquefoil</a></li><li><a href="global.html#circNotch">circNotch</a></li><li><a href="global.html#circPortrusion">circPortrusion</a></li><li><a href="global.html#circularEdge">circularEdge</a></li><li><a href="global.html#cuboidEdge">cuboidEdge</a></li><li><a href="global.html#cutCircularSlice">cutCircularSlice</a></li><li><a href="global.html#measure">measure</a></li><li><a href="global.html#octagonal">octagonal</a></li><li><a href="global.html#octofoil">octofoil</a></li><li><a href="global.html#onePt">onePt</a></li><li><a href="global.html#quatrefoil">quatrefoil</a></li><li><a href="global.html#sexfoil">sexfoil</a></li><li><a href="global.html#sqCornerCircNotch">sqCornerCircNotch</a></li><li><a href="global.html#sqCornerCircles">sqCornerCircles</a></li><li><a href="global.html#sunkenPanelCirc">sunkenPanelCirc</a></li><li><a href="global.html#sunkenPanelRect">sunkenPanelRect</a></li><li><a href="global.html#threePt">threePt</a></li><li><a href="global.html#trefoil">trefoil</a></li><li><a href="global.html#twoPt">twoPt</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Apr 14 2025 16:37:02 GMT-0400 (Eastern Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 05 2025 18:07:59 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

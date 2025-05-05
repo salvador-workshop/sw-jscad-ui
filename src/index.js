@@ -1,10 +1,12 @@
 const buildersModule = require('./builders');
 const utilsModule = require('./utils');
 
-const init = ({ lib, swLib }) => {
+const init = ({ lib }) => {
+    const libStarter = { ...utilsModule.init({ lib, swLib: null }) }
+    // Builders have access to SW utils functions
     return {
-        ...buildersModule.init({ lib, swLib }),
-        ...utilsModule.init({ lib, swLib }),
+        ...libStarter,
+        ...buildersModule.init({ lib, swLib: libStarter }),
     }
 }
 

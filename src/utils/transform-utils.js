@@ -1,6 +1,12 @@
 "use strict"
 
-const transformUtilsInit = (jscadInstance) => {
+const transformUtils = ({ lib, swLib }) => {
+    const { subtract } = lib.booleans
+    const { measureDimensions } = lib.measurements;
+    const { cuboid } = lib.primitives
+    const { align, mirror, rotate } = lib.transforms
+    const { colorize } = lib.colors
+
     return {
         /**
          * Cuts a given geometry in half.
@@ -10,11 +16,6 @@ const transformUtilsInit = (jscadInstance) => {
          * @returns bisected geometry
          */
         bisect3d: (opts) => {
-            const { subtract } = jscadInstance.booleans
-            const { measureDimensions } = jscadInstance.measurements;
-            const { cuboid } = jscadInstance.primitives
-            const { align } = jscadInstance.transforms
-
             const geomDims = measureDimensions(opts.geom);
             const baseCutBox = cuboid({
                 size: [
@@ -23,7 +24,6 @@ const transformUtilsInit = (jscadInstance) => {
                     geomDims[2] + 3,
                 ]
             });
-
             let alignedCutBox = null;
             const remAxis = opts.axis || 'z';
             switch (remAxis) {
@@ -60,12 +60,6 @@ const transformUtilsInit = (jscadInstance) => {
          * @returns bisected geometry
          */
         cutCircularSlice: (opts) => {
-            const { subtract } = jscadInstance.booleans
-            const { cuboid } = jscadInstance.primitives
-            const { measureDimensions } = jscadInstance.measurements;
-            const { align, mirror, rotate } = jscadInstance.transforms
-            const { colorize } = jscadInstance.colors
-
             const geomDims = measureDimensions(opts.geom);
             const baseCutBox = cuboid({
                 size: [
@@ -88,4 +82,4 @@ const transformUtilsInit = (jscadInstance) => {
     }
 }
 
-module.exports = { init: transformUtilsInit };
+module.exports = { init: transformUtils };

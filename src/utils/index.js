@@ -1,10 +1,10 @@
-const init = (jscadInstance) => {
+const init = ({ lib, swLib }) => {
     return {
         generalUtils: require('./general-utils'),
         geometryUtils: require('./geometry-utils'),
-        positionUtils: require('./position-utils').init(jscadInstance),
-        textUtils: require('./text-utils').init(jscadInstance),
-        transformUtils: require('./transform-utils').init(jscadInstance),
+        positionUtils: require('./position-utils').init({ lib, swLib }),
+        textUtils: require('./text-utils').init({ lib, swLib }),
+        transformUtils: require('./transform-utils').init({ lib, swLib }),
     }
 }
 

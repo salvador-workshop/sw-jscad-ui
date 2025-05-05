@@ -1,7 +1,13 @@
 
 "use strict"
 
-const archBuilderInit = (jscadInstance) => {
+const archBuilder = ({ lib, swLib }) => {
+  const { path2, geom2 } = lib.geometries
+  const { extrudeRotate } = lib.extrusions
+  const { arc, cuboid } = lib.primitives
+  const { translate, mirror, rotate, align } = lib.transforms
+  const { union, subtract, intersect } = lib.booleans
+
   return {
     /**
      * Builds a one-centre (semicircular) arch.
@@ -10,11 +16,6 @@ const archBuilderInit = (jscadInstance) => {
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
      */
     onePt: (opts) => {
-      const { path2, geom2 } = jscadInstance.geometries
-      const { extrudeRotate } = jscadInstance.extrusions
-      const { arc } = jscadInstance.primitives
-      const { translate, rotate, align } = jscadInstance.transforms
-
       const arcRad = opts.arcRadius;
 
       if (opts.geomProfile) {
@@ -38,12 +39,6 @@ const archBuilderInit = (jscadInstance) => {
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
      */
     twoPt: (opts) => {
-      const { path2, geom2 } = jscadInstance.geometries
-      const { extrudeRotate } = jscadInstance.extrusions
-      const { cuboid, arc } = jscadInstance.primitives
-      const { translate, mirror, rotate, align } = jscadInstance.transforms
-      const { union, subtract, intersect } = jscadInstance.booleans
-
       const arcRad = opts.arcRadius;
       const archWth = opts.archWidth;
 
@@ -104,4 +99,4 @@ const archBuilderInit = (jscadInstance) => {
  * @module archBuilder
  * @version 2.0.0
  */
-module.exports = { init: archBuilderInit }
+module.exports = { init: archBuilder }

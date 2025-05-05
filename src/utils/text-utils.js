@@ -3,15 +3,16 @@
 const DEFAULT_EXTRUDE_HEIGHT = 1;
 const DEFAULT_PANEL_HEIGHT = 2;
 
-const textUtilsInit = (jscadInstance) => {
-    const flatText = (opts) => {
-        const { union } = jscadInstance.booleans
-        const { circle } = jscadInstance.primitives
-        const { translate, align } = jscadInstance.transforms
-        const { vectorText } = jscadInstance.text
-        const { hullChain } = jscadInstance.hulls
-        const { extrudeLinear } = jscadInstance.extrusions
+const textUtils = ({ lib, swLib }) => {
+    const { union, subtract } = lib.booleans
+    const { circle, cuboid } = lib.primitives
+    const { translate, align } = lib.transforms
+    const { vectorText } = lib.text
+    const { hullChain } = lib.hulls
+    const { extrudeLinear } = lib.extrusions
+    const { measureDimensions, measureBoundingBox } = lib.measurements;
 
+    const flatText = (opts) => {
         if (opts.message === undefined || opts.message.length === 0) return []
 
         const lineRadius = opts.charLineWidth / 2
@@ -31,10 +32,6 @@ const textUtilsInit = (jscadInstance) => {
     return {
         flatText,
         textPanel: (opts) => {
-            const { subtract } = jscadInstance.booleans
-            const { cuboid } = jscadInstance.primitives
-            const { measureDimensions, measureBoundingBox } = jscadInstance.measurements;
-            const { align } = jscadInstance.transforms
             const extrudeHt = opts.extrudeHeight || DEFAULT_EXTRUDE_HEIGHT;
 
             const textModel = flatText({
@@ -62,4 +59,4 @@ const textUtilsInit = (jscadInstance) => {
     }
 }
 
-module.exports = { init: textUtilsInit };
+module.exports = { init: textUtils };

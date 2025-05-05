@@ -1,6 +1,12 @@
 "use strict"
 
-const mouldBuilderInit = (jscadInstance) => {
+const mouldBuilder = ({ lib, swLib }) => {
+  const { measureBoundingBox } = lib.measurements
+  const { extrudeLinear, extrudeRotate } = lib.extrusions
+  const { union, intersect } = lib.booleans
+  const { rotate, align, translate, mirror } = lib.transforms
+  const { cuboid, cylinder } = lib.primitives
+
   /**
    * Builds a cuboid with given 2D profile placed on one edge.
    * @param {Object} opts
@@ -10,12 +16,6 @@ const mouldBuilderInit = (jscadInstance) => {
    *     base cuboid ('top' | 'middle' | 'bottom'). Defaults to 'middle'
    */
   const cuboidOneEdge = (opts) => {
-    const { measureBoundingBox } = jscadInstance.measurements
-    const { extrudeLinear } = jscadInstance.extrusions
-    const { union } = jscadInstance.booleans
-    const { rotate, align } = jscadInstance.transforms
-    const { cuboid } = jscadInstance.primitives
-
     const profileBbox = measureBoundingBox(opts.geomProfile);
     const profileSize = [profileBbox[1][0] - profileBbox[0][0], profileBbox[1][1] - profileBbox[0][1]];
 
@@ -36,18 +36,14 @@ const mouldBuilderInit = (jscadInstance) => {
      * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
      */
     cuboidEdge: (opts) => {
-      const { union, intersect } = jscadInstance.booleans
-      const { rotate, align, mirror } = jscadInstance.transforms
-
-
       // // X axis
       const xHalfSize = [opts.size[0] / 2, opts.size[1], opts.size[2]];
-      const xHalfBlock = align({ modes: ['min', 'center', 'none'] }, cuboidOneEdge({ lib: jscadInstance, size: xHalfSize, geomProfile: opts.geomProfile }));
+      const xHalfBlock = align({ modes: ['min', 'center', 'none'] }, cuboidOneEdge({ size: xHalfSize, geomProfile: opts.geomProfile }));
       const xBlock = union(xHalfBlock, mirror({ normal: [1, 0, 0] }, xHalfBlock));
 
       // // Y axis
       const yHalfSize = [opts.size[0], opts.size[1] / 2, opts.size[2]];
-      const yHalfBlock = rotate([0, 0, Math.PI / -2], cuboidOneEdge({ lib: jscadInstance, size: yHalfSize, geomProfile: opts.geomProfile }));
+      const yHalfBlock = rotate([0, 0, Math.PI / -2], cuboidOneEdge({ size: yHalfSize, geomProfile: opts.geomProfile }));
       const yHalfBlockAdj = align({ modes: ['center', 'max', 'none'] }, yHalfBlock);
       const yBlock = union(yHalfBlockAdj, mirror({ normal: [0, 1, 0] }, yHalfBlockAdj));
 
@@ -62,12 +58,6 @@ const mouldBuilderInit = (jscadInstance) => {
      * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
      */
     circularEdge: (opts) => {
-      const { measureBoundingBox } = jscadInstance.measurements
-      const { extrudeRotate } = jscadInstance.extrusions
-      const { union } = jscadInstance.booleans
-      const { translate } = jscadInstance.transforms
-      const { cylinder } = jscadInstance.primitives
-
       const profileBbox = measureBoundingBox(opts.geomProfile);
       const profileSize = [profileBbox[1][0] - profileBbox[0][0], profileBbox[1][1] - profileBbox[0][1]];
       const baseCylRad = opts.radius - profileSize[0];
@@ -107,4 +97,4 @@ const mouldBuilderInit = (jscadInstance) => {
  * @module mouldBuilder
  * @version 1.0.0
  */
-module.exports = { init: mouldBuilderInit }
+module.exports = { init: mouldBuilder }

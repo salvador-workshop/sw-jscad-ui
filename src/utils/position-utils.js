@@ -1,6 +1,6 @@
 "use strict"
 
-const positionUtilsInit = (jscadInstance) => {
+const positionUtils = ({ lib, swLib }) => {
     return {
         /**
          * Measures key info, and presents it in a readable manner, like `{ size: { x: 99, y: 99, z: 99 }, min: { ... }, max: { ... } }`
@@ -9,7 +9,7 @@ const positionUtilsInit = (jscadInstance) => {
             const {
                 measureDimensions,
                 measureBoundingBox,
-            } = jscadInstance.measurements
+            } = lib.measurements
 
             return {
                 boundingBox: measureBoundingBox(inputGeom),
@@ -19,4 +19,4 @@ const positionUtilsInit = (jscadInstance) => {
     }
 }
 
-module.exports = { init: positionUtilsInit };
+module.exports = { init: positionUtils };

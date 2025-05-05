@@ -1,10 +1,10 @@
-const init = (jscadInstance) => {
+const init = ({ lib, swLib }) => {
     return {
-        archBuilder: require('./arch-builder').init(jscadInstance),
-        columnBuilder: require('./column-builder').init(jscadInstance),
-        foilBuilder: require('./foil-builder').init(jscadInstance),
-        mouldBuilder: require('./mould-builder').init(jscadInstance),
-        profileBuilder: require('./profile-builder').init(jscadInstance),
+        archBuilder: require('./arch-builder').init({ lib, swLib }),
+        columnBuilder: require('./column-builder').init({ lib, swLib }),
+        foilBuilder: require('./foil-builder').init({ lib, swLib }),
+        mouldBuilder: require('./mould-builder').init({ lib, swLib }),
+        profileBuilder: require('./profile-builder').init({ lib, swLib }),
     }
 }
 

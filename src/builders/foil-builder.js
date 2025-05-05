@@ -1,6 +1,6 @@
 "use strict"
 
-const foilBuilderInit = ({ lib, swLib }) => {
+const foilBuilder = ({ lib, swLib }) => {
     const { union, subtract, scission } = lib.booleans
     const { rotate, align, translate, mirror } = lib.transforms
     const { circle, cuboid, rectangle } = lib.primitives
@@ -221,4 +221,4 @@ const foilBuilderInit = ({ lib, swLib }) => {
  * @module foilBuilder
  * @version 2.0.0
  */
-module.exports = { init: foilBuilderInit };
+module.exports = { init: foilBuilder };

@@ -1,6 +1,6 @@
 "use strict"
 
-const mouldBuilderInit = ({ lib, swLib }) => {
+const mouldBuilder = ({ lib, swLib }) => {
   const { measureBoundingBox } = lib.measurements
   const { extrudeLinear, extrudeRotate } = lib.extrusions
   const { union, intersect } = lib.booleans
@@ -97,4 +97,4 @@ const mouldBuilderInit = ({ lib, swLib }) => {
  * @module mouldBuilder
  * @version 1.0.0
  */
-module.exports = { init: mouldBuilderInit }
+module.exports = { init: mouldBuilder }

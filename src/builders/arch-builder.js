@@ -1,7 +1,7 @@
 
 "use strict"
 
-const archBuilderInit = ({ lib, swLib }) => {
+const archBuilder = ({ lib, swLib }) => {
   const { path2, geom2 } = lib.geometries
   const { extrudeRotate } = lib.extrusions
   const { arc, cuboid } = lib.primitives
@@ -99,4 +99,4 @@ const archBuilderInit = ({ lib, swLib }) => {
  * @module archBuilder
  * @version 2.0.0
  */
-module.exports = { init: archBuilderInit }
+module.exports = { init: archBuilder }

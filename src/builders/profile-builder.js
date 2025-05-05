@@ -2,7 +2,7 @@
 
 const EDGE_PROFILE_MARGIN = 1;
 
-const profileBuilderInit = ({ lib, swLib }) => {
+const profileBuilder = ({ lib, swLib }) => {
   const { square, circle, rectangle } = lib.primitives
   const { intersect, union, subtract } = lib.booleans
   const { rotate, align, translate } = lib.transforms
@@ -171,4 +171,4 @@ const profileBuilderInit = ({ lib, swLib }) => {
  * @module profileBuilder
  * @version 2.0.0
  */
-module.exports = { init: profileBuilderInit }
+module.exports = { init: profileBuilder }

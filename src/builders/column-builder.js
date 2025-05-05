@@ -1,6 +1,6 @@
 "use strict"
 
-const columnBuilderInit = ({ lib, swLib }) => {
+const columnBuilder = ({ lib, swLib }) => {
   const { cuboid, roundedCylinder, cylinder } = lib.primitives
   const { align } = lib.transforms
   const { subtract, union } = lib.booleans
@@ -25,7 +25,7 @@ const columnBuilderInit = ({ lib, swLib }) => {
    * @param {number} opts.radius - element radius
    */
   const colCylinder = (opts) => {
-    
+
 
     return cylinder({ radius: opts.radius, height: opts.height });
   }
@@ -152,4 +152,4 @@ const columnBuilderInit = ({ lib, swLib }) => {
  * @module columnBuilder
  * @version 3.0.0
  */
-module.exports = { init: columnBuilderInit };
+module.exports = { init: columnBuilder };

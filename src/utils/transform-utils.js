@@ -1,6 +1,6 @@
 "use strict"
 
-const transformUtilsInit = ({ lib, swLib }) => {
+const transformUtils = ({ lib, swLib }) => {
     const { subtract } = lib.booleans
     const { measureDimensions } = lib.measurements;
     const { cuboid } = lib.primitives
@@ -24,7 +24,6 @@ const transformUtilsInit = ({ lib, swLib }) => {
                     geomDims[2] + 3,
                 ]
             });
-
             let alignedCutBox = null;
             const remAxis = opts.axis || 'z';
             switch (remAxis) {
@@ -83,4 +82,4 @@ const transformUtilsInit = ({ lib, swLib }) => {
     }
 }
 
-module.exports = { init: transformUtilsInit };
+module.exports = { init: transformUtils };

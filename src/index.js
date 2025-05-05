@@ -1,10 +1,10 @@
 const buildersModule = require('./builders');
 const utilsModule = require('./utils');
 
-const init = (jscadInstance) => {
+const init = ({ lib, swLib }) => {
     return {
-        ...buildersModule.init(jscadInstance),
-        ...utilsModule.init(jscadInstance),
+        ...buildersModule.init({ lib, swLib }),
+        ...utilsModule.init({ lib, swLib }),
     }
 }
 

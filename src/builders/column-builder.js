@@ -1,6 +1,12 @@
 "use strict"
 
-const columnBuilderInit = (jscadInstance) => {
+const columnBuilderInit = ({ lib, swLib }) => {
+  const { cuboid, roundedCylinder, cylinder } = lib.primitives
+  const { align } = lib.transforms
+  const { subtract, union } = lib.booleans
+  const { extrudeLinear } = lib.extrusions
+  const { measureBoundingBox } = lib.measurements
+
   /**
    * Simple cuboid
    * @param {Object} opts
@@ -8,7 +14,6 @@ const columnBuilderInit = (jscadInstance) => {
    * @param {number} opts.radius - element radius
    */
   const colCuboid = (opts) => {
-    const { cuboid } = jscadInstance.primitives
 
     return cuboid({ size: [opts.radius * 2, opts.radius * 2, opts.height] });
   }
@@ -20,7 +25,7 @@ const columnBuilderInit = (jscadInstance) => {
    * @param {number} opts.radius - element radius
    */
   const colCylinder = (opts) => {
-    const { cylinder } = jscadInstance.primitives
+    
 
     return cylinder({ radius: opts.radius, height: opts.height });
   }
@@ -33,10 +38,6 @@ const columnBuilderInit = (jscadInstance) => {
    * @param {number} opts.roundRadius - radius of cylinder edge
    */
   const capRdCylinder = (opts) => {
-    const { align } = jscadInstance.transforms
-    const { cuboid, roundedCylinder } = jscadInstance.primitives
-    const { subtract } = jscadInstance.booleans
-
     const rdRadius = opts.roundRadius || 0.75;
     const baseShape = roundedCylinder({ radius: opts.radius, height: opts.height * 2, roundRadius: rdRadius });
     const cutBlock = align(
@@ -55,10 +56,6 @@ const columnBuilderInit = (jscadInstance) => {
    * @param {number} opts.roundRadius - radius of cylinder edge
    */
   const baseRdCylinder = (opts) => {
-    const { align } = jscadInstance.transforms
-    const { cuboid, roundedCylinder } = jscadInstance.primitives
-    const { subtract } = jscadInstance.booleans
-
     const rdRadius = opts.roundRadius || 1;
     const baseShape = roundedCylinder({ radius: opts.radius, height: opts.height * 2, roundRadius: rdRadius });
     const cutBlock = align(
@@ -76,8 +73,6 @@ const columnBuilderInit = (jscadInstance) => {
    * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
    */
   const colExtrude = (opts) => {
-    const { extrudeLinear } = jscadInstance.extrusions
-
     return extrudeLinear({ height: opts.height }, opts.geomProfile);
   }
 
@@ -119,30 +114,23 @@ const columnBuilderInit = (jscadInstance) => {
      * @param {number} opts.height - total height of column
      */
     threePt: (opts) => {
-      const { align } = jscadInstance.transforms
-      const { measureBoundingBox } = jscadInstance.measurements
-      const { union } = jscadInstance.booleans
-
       const baseStyle = opts.base[0];
       const shaftStyle = opts.shaft[0];
       const capitalStyle = opts.capital[0];
 
       const base = columnPartBuilder.base[baseStyle]({
-        lib: jscadInstance,
         height: opts.base[1],
         radius: opts.base[2],
         geomProfile: opts.base[3],
       });
 
       const shaft = columnPartBuilder.shaft[shaftStyle]({
-        lib: jscadInstance,
         height: opts.height,
         radius: opts.shaft[1],
         geomProfile: opts.shaft[2],
       });
 
       const capital = columnPartBuilder.capital[capitalStyle]({
-        lib: jscadInstance,
         height: opts.capital[1],
         radius: opts.capital[2],
         geomProfile: opts.capital[3],

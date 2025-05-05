@@ -1,6 +1,11 @@
 "use strict"
 
-const foilBuilderInit = (jscadInstance) => {
+const foilBuilderInit = ({ lib, swLib }) => {
+    const { union, subtract, scission } = lib.booleans
+    const { rotate, align, translate, mirror } = lib.transforms
+    const { circle, cuboid, rectangle } = lib.primitives
+    const { measureBoundingBox } = lib.measurements
+    const { extrudeRotate } = lib.extrusions
 
     /**
      * Builds a 2D n-foil opening
@@ -11,12 +16,6 @@ const foilBuilderInit = (jscadInstance) => {
      * @access private
      */
     const buildFoil2d = (opts) => {
-        const { union } = jscadInstance.booleans
-        const { rotate, align } = jscadInstance.transforms
-        const { circle } = jscadInstance.primitives
-
-        // console.log(opts);
-        // const containerCircle = circle({ radius: opts.radius });
         const centralAngle = Math.PI * 2 / opts.numLobes;
         const sinHalfCentral = Math.sin(centralAngle / 2);
 
@@ -70,14 +69,6 @@ const foilBuilderInit = (jscadInstance) => {
      * @access private
      */
     const buildFoil3d = (opts) => {
-        const { measureBoundingBox } = jscadInstance.measurements
-        const { extrudeRotate } = jscadInstance.extrusions
-        const { union, subtract, scission } = jscadInstance.booleans
-        const { translate, mirror, rotate, align } = jscadInstance.transforms
-        const { cuboid, rectangle } = jscadInstance.primitives
-
-        console.log(opts);
-        // const containerCircle = circle({ radius: opts.radius });
         const centralAngle = Math.PI * 2 / opts.numLobes;
         const sinHalfCentral = Math.sin(centralAngle / 2);
         const isCentreCut = opts.cutCentre || true;

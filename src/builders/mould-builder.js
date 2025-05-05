@@ -42,7 +42,7 @@ const mouldBuilder = ({ lib, swLib }) => {
       const xBlock = union(xHalfBlock, mirror({ normal: [1, 0, 0] }, xHalfBlock));
 
       // // Y axis
-      const yHalfSize = [opts.size[0], opts.size[1] / 2, opts.size[2]];
+      const yHalfSize = [opts.size[1] / 2, opts.size[0], opts.size[2]];
       const yHalfBlock = rotate([0, 0, Math.PI / -2], cuboidOneEdge({ size: yHalfSize, geomProfile: opts.geomProfile }));
       const yHalfBlockAdj = align({ modes: ['center', 'max', 'none'] }, yHalfBlock);
       const yBlock = union(yHalfBlockAdj, mirror({ normal: [0, 1, 0] }, yHalfBlockAdj));

@@ -1,15 +1,13 @@
 const init = ({ lib }) => {
-    const starter = {
+    const swLib = {
         constants: require('./constants'),
         generalUtils: require('./general-utils'),
         geometryUtils: require('./geometry-utils'),
     }
-    return {
-        ...starter,
-        positionUtils: require('./position-utils').init({ lib, starter }),
-        textUtils: require('./text-utils').init({ lib, starter }),
-        transformUtils: require('./transform-utils').init({ lib, starter }),
-    }
+    swLib.positionUtils = require('./position-utils').init({ lib, swLib });
+    swLib.textUtils = require('./text-utils').init({ lib, swLib });
+    swLib.transformUtils = require('./transform-utils').init({ lib, swLib });
+    return swLib;
 }
 
 /**

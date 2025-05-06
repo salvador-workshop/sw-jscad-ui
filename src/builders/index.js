@@ -1,11 +1,13 @@
 const init = ({ lib, swLib }) => {
-    return {
-        archBuilder: require('./arch-builder').init({ lib, swLib }),
-        columnBuilder: require('./column-builder').init({ lib, swLib }),
-        foilBuilder: require('./foil-builder').init({ lib, swLib }),
+    const swBuilders = {
         mouldBuilder: require('./mould-builder').init({ lib, swLib }),
         profileBuilder: require('./profile-builder').init({ lib, swLib }),
     }
+    swBuilders.archBuilder = require('./arch-builder').init({ lib, swLib });
+    swBuilders.columnBuilder = require('./column-builder').init({ lib, swLib });
+    swBuilders.foilBuilder = require('./foil-builder').init({ lib, swLib });
+
+    return swBuilders;
 }
 
 /**

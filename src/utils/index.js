@@ -1,3 +1,4 @@
+
 const init = ({ lib }) => {
     const utils = {
         constants: require('./constants'),
@@ -11,6 +12,7 @@ const init = ({ lib }) => {
         basicTrimFamily: require('./basic-trim-family').init({ lib }),
         archBuilder: require('./arch-builder').init({ lib }),
         foilBuilder: require('./foil-builder').init({ lib }),
+        superPrimitives: require('./super-primitives').init({ lib }),
     }
 
     // Dependent on other utils

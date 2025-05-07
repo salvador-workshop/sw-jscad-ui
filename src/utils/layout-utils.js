@@ -6,9 +6,12 @@ const layoutUtils = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;
     const { translate, center, align } = lib.transforms;
     const { measureDimensions, measureVolume } = lib.measurements;
+
     const {
         textUtils,
+        superPrimitives,
     } = swLib
+    const { frameCuboid } = superPrimitives;
 
     const layoutElements = new Map();
     let largestDimensionX = 0;
@@ -79,7 +82,7 @@ const layoutUtils = ({ lib, swLib }) => {
         //     size: objectDims,
         // });
 
-        return swLib.superPrimitives.frameCuboid({
+        return frameCuboid({
             size: [5, 5, 5],
             frameWidth: 2,
         });

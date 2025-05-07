@@ -9,9 +9,8 @@ const layoutUtils = ({ lib, swLib }) => {
 
     const {
         textUtils,
-        superPrimitives,
     } = swLib
-    const { frameCuboid } = superPrimitives;
+    const { frameCuboid } = swLib.superPrimitives;
 
     const layoutElements = new Map();
     let largestDimensionX = 0;

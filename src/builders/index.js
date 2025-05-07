@@ -1,17 +1,10 @@
 const init = ({ lib, swLib }) => {
-    const newLib = {
-        ...swLib,
-        mouldBuilder: require('./mould-builder').init({ lib }),
-        profileBuilder: require('./profile-builder').init({ lib }),
-        archBuilder: require('./arch-builder').init({ lib }),
-        foilBuilder: require('./foil-builder').init({ lib }),
-        basicTrimFamily: require('./basic-trim-family').init({ lib }),
+    const builders = {
+        columnBuilder: require('./column-builder').init({ lib, swLib }),
+        wallBuilder: require('./wall-builder').init({ lib, swLib }),
     }
 
-    newLib.columnBuilder = require('./column-builder').init({ lib, newLib });
-    newLib.wallBuilder = require('./wall-builder').init({ lib, newLib });
-
-    return newLib;
+    return builders;
 }
 
 /**

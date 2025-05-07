@@ -1,19 +1,24 @@
 const init = ({ lib }) => {
-    const swLib = {
+    const utils = {
         constants: require('./constants'),
         generalUtils: require('./general-utils'),
         geometryUtils: require('./geometry-utils'),
     }
 
     // JSCAD dependent
-    swLib.positionUtils = require('./position-utils').init({ lib });
-    swLib.textUtils = require('./text-utils').init({ lib });
-    swLib.transformUtils = require('./transform-utils').init({ lib });
+    utils.positionUtils = require('./position-utils').init({ lib });
+    utils.textUtils = require('./text-utils').init({ lib });
+    utils.transformUtils = require('./transform-utils').init({ lib });
+    utils.mouldBuilder = require('./mould-builder').init({ lib });
+    utils.profileBuilder = require('./profile-builder').init({ lib });
+    utils.basicTrimFamily = require('./basic-trim-family').init({ lib });
+    utils.archBuilder = require('./arch-builder').init({ lib });
+    utils.foilBuilder = require('./foil-builder').init({ lib });
 
     // Dependent on other utils
-    swLib.layoutUtils = require('./transform-utils').init({ lib, swLib });
+    utils.layoutUtils = require('./transform-utils').init({ lib, utils });
 
-    return swLib;
+    return utils;
 }
 
 /**

@@ -1,7 +1,7 @@
 
 "use strict"
 
-const archBuilder = ({ lib, swLib }) => {
+const archBuilder = ({ lib }) => {
   const { path2, geom2 } = lib.geometries
   const { extrudeRotate } = lib.extrusions
   const { arc, cuboid } = lib.primitives

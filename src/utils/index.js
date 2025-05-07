@@ -4,9 +4,15 @@ const init = ({ lib }) => {
         generalUtils: require('./general-utils'),
         geometryUtils: require('./geometry-utils'),
     }
-    swLib.positionUtils = require('./position-utils').init({ lib, swLib });
-    swLib.textUtils = require('./text-utils').init({ lib, swLib });
-    swLib.transformUtils = require('./transform-utils').init({ lib, swLib });
+
+    // JSCAD dependent
+    swLib.positionUtils = require('./position-utils').init({ lib });
+    swLib.textUtils = require('./text-utils').init({ lib });
+    swLib.transformUtils = require('./transform-utils').init({ lib });
+
+    // Dependent on other utils
+    swLib.layoutUtils = require('./transform-utils').init({ lib, swLib });
+
     return swLib;
 }
 

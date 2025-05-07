@@ -13,6 +13,15 @@ const generalUtils = {
     arrayCartesianProduct: _arrCartesianProduct,
     inchesToMM: (numInches) => numInches * INCHES_MM_FACTOR,
     mmToInches: (numMils) => numMils / INCHES_MM_FACTOR,
+    factorize: (num) => {
+        const int1 = Math.floor(Math.sqrt(num));
+        const rem = num % int1
+        if (rem === 0) {
+            return [int1, int1]
+        }
+        const int2 = (num - rem) / int1
+        return [int1, int2 + 1]
+    },
 }
 
 module.exports = generalUtils;

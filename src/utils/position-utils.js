@@ -1,6 +1,6 @@
 "use strict"
 
-const positionUtils = ({ lib, swLib }) => {
+const positionUtils = ({ lib }) => {
     return {
         /**
          * Measures key info, and presents it in a readable manner, like `{ size: { x: 99, y: 99, z: 99 }, min: { ... }, max: { ... } }`

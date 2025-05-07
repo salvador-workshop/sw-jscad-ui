@@ -2,7 +2,7 @@
 
 const EDGE_PROFILE_MARGIN = 1;
 
-const profileBuilder = ({ lib, swLib }) => {
+const profileBuilder = ({ lib }) => {
   const { square, circle, rectangle } = lib.primitives
   const { intersect, union, subtract } = lib.booleans
   const { rotate, align, translate } = lib.transforms

@@ -3,7 +3,7 @@
 const DEFAULT_EXTRUDE_HEIGHT = 1;
 const DEFAULT_PANEL_HEIGHT = 2;
 
-const textUtils = ({ lib, swLib }) => {
+const textUtils = ({ lib }) => {
     const { union, subtract } = lib.booleans
     const { circle, cuboid } = lib.primitives
     const { translate, align } = lib.transforms

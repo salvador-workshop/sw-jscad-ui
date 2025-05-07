@@ -1,6 +1,6 @@
 "use strict"
 
-const mouldBuilder = ({ lib, swLib }) => {
+const mouldBuilder = ({ lib }) => {
   const { measureBoundingBox } = lib.measurements
   const { extrudeLinear, extrudeRotate } = lib.extrusions
   const { union, intersect } = lib.booleans

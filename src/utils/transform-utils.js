@@ -1,6 +1,6 @@
 "use strict"
 
-const transformUtils = ({ lib, swLib }) => {
+const transformUtils = ({ lib }) => {
     const { subtract } = lib.booleans
     const { measureDimensions } = lib.measurements;
     const { cuboid } = lib.primitives

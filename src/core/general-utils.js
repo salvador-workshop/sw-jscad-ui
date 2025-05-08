@@ -1,7 +1,7 @@
 "use strict"
 
 const INCHES_MM_FACTOR = 25.4;
-const _arrCartesianProduct = (a, b) => a.reduce((acc, x) => [...acc, ...b.map(y => [x, y])], []);
+const arrayCartesianProduct = (a, b) => a.reduce((acc, x) => [...acc, ...b.map(y => [x, y])], []);
 
 const generalUtils = {
     isEven: (n) => {
@@ -10,7 +10,7 @@ const generalUtils = {
     isOdd: (n) => {
         return Math.abs(n % 2) == 1;
     },
-    arrayCartesianProduct: _arrCartesianProduct,
+    arrayCartesianProduct,
     inchesToMM: (numInches) => numInches * INCHES_MM_FACTOR,
     mmToInches: (numMils) => numMils / INCHES_MM_FACTOR,
     factorize: (num) => {

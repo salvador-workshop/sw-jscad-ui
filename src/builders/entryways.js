@@ -9,8 +9,8 @@ const entrywayBuilder = ({ lib, swLib }) => {
 
     const {
         errors,
-        archBuilder,
-        wallBuilder,
+        arches,
+        walls,
     } = swLib
 
     return {
@@ -41,14 +41,14 @@ const entrywayBuilder = ({ lib, swLib }) => {
             const wall2Specs = [wallSpace / 2, opts.wallThickness, opts.wallHeight];
             const topWallSpecs = [opts.wallLength, opts.wallThickness, opts.wallHeight];
 
-            const trimUnits = wallBuilder.verifyTrimUnits({
+            const trimUnits = walls.verifyTrimUnits({
                 trimOpts: opts.trimOpts,
                 baseUnits: opts.baseUnits,
                 dadoUnits: opts.dadoUnits,
                 crownUnits: opts.crownUnits,
             })
 
-            const wall1 = wallBuilder.build({
+            const wall1 = walls.build({
                 height: wall1Specs[2],
                 thickness: wall1Specs[1],
                 length: wall1Specs[0],
@@ -65,7 +65,7 @@ const entrywayBuilder = ({ lib, swLib }) => {
             const wall1Dims = measureDimensions(wall1);
             console.log(wall1Dims);
 
-            const wall2 = wallBuilder.build({
+            const wall2 = walls.build({
                 height: wall2Specs[2],
                 thickness: wall2Specs[1],
                 length: wall2Specs[0],
@@ -79,7 +79,7 @@ const entrywayBuilder = ({ lib, swLib }) => {
                 trimUnitDepth: opts.trimUnitDepth,
             });
 
-            const topWall = wallBuilder.build({
+            const topWall = walls.build({
                 height: topWallSpecs[2],
                 thickness: topWallSpecs[1],
                 length: topWallSpecs[0],
@@ -93,7 +93,7 @@ const entrywayBuilder = ({ lib, swLib }) => {
                 trimUnitDepth: opts.trimUnitDepth,
             });
 
-            let archTrimProfile = wallBuilder.getEntryTrimForDadoUnits({
+            let archTrimProfile = walls.getEntryTrimForDadoUnits({
                 dadoUnits: trimUnits.dadoUnits,
                 trimUnitHeight: opts.trimUnitHeight,
                 trimUnitDepth: opts.trimUnitDepth,
@@ -104,13 +104,13 @@ const entrywayBuilder = ({ lib, swLib }) => {
             const archRadFactor = opts.archRadFactor || 0.75;
             const thinWallThickness = opts.wallThickness - (archTrimProfileSpecs[1] * 2);
 
-            const trimArch = archBuilder.twoPt({ arcRadius: opts.entryLength * archRadFactor, archWidth: opts.entryLength, profileWidth: 5, geomProfile: archTrimProfile });
+            const trimArch = arches.twoPt({ arcRadius: opts.entryLength * archRadFactor, archWidth: opts.entryLength, profileWidth: 5, geomProfile: archTrimProfile });
             const adjTrimArch = translate([0, (thinWallThickness + archTrimProfileSpecs[1]) / 2, wall1Dims[2]], trimArch);
             const adjTrimArchOpp = mirror({ normal: [0, 1, 0] }, adjTrimArch);
             const trimArchDims = measureDimensions(trimArch);
 
             const innerOpeningSpecs = [opts.entryLength, 5 * opts.wallThickness, null];
-            const innerOpeningProfile = archBuilder.twoPt({ arcRadius: innerOpeningSpecs[0] * archRadFactor, archWidth: innerOpeningSpecs[0] });
+            const innerOpeningProfile = arches.twoPt({ arcRadius: innerOpeningSpecs[0] * archRadFactor, archWidth: innerOpeningSpecs[0] });
             const innerOpening = rotate([Math.PI / 2, 0, 0], extrudeLinear({ height: innerOpeningSpecs[1] }, innerOpeningProfile));
             const adjInnerOpening = translate([0, innerOpeningSpecs[1] / 2, wall1Dims[2]], innerOpening);
 

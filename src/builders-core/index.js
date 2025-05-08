@@ -2,11 +2,11 @@
 const init = ({ lib, swLib }) => {
     const buildersCore = {
         // Dependent on lib
-        archBuilder: require('./arch-builder').init({ lib }),
-        basicTrimFamily: require('./basic-trim-family').init({ lib }),
-        foilBuilder: require('./foil-builder').init({ lib }),
-        mouldBuilder: require('./mould-builder').init({ lib }),
-        profileBuilder: require('./profile-builder').init({ lib }),
+        arches: require('./arches').init({ lib }),
+        foils: require('./foils').init({ lib }),
+        moulds: require('./moulds').init({ lib }),
+        profiles: require('./profiles').init({ lib }),
+        trimFamilyAranea: require('./trim-family-aranea').init({ lib }),
     }
 
     return buildersCore;

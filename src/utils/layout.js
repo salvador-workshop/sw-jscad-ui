@@ -1,6 +1,3 @@
-//---------------------------
-// L A Y O U T    U T I L S
-//---------------------------
 
 const layoutUtils = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;
@@ -8,7 +5,8 @@ const layoutUtils = ({ lib, swLib }) => {
     const { measureDimensions, measureVolume } = lib.measurements;
 
     const {
-        textUtils,
+        text,
+        maths
     } = swLib
     const { frameCuboid } = swLib.superPrimitives;
 
@@ -135,7 +133,7 @@ const layoutUtils = ({ lib, swLib }) => {
     }
 
     const gridLayout = ({ layoutOpts }) => {
-        const gridSize = swLib.generalUtils.factorize(layoutElements.size);
+        const gridSize = maths.factorize(layoutElements.size);
         const numColumns = gridSize[1];
         console.log(`gridLayout() layoutOpts = ${JSON.stringify(layoutOpts)}`);
         console.log(`    largestDimension = ${JSON.stringify(largestDimension())}`);

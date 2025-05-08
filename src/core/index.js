@@ -2,9 +2,8 @@
 const init = ({ lib }) => {
     const core = {
         constants: require('./constants'),
-        generalUtils: require('./general-utils'),
-        positionUtils: require('./position-utils').init({ lib }),
-        textUtils: require('./text-utils').init({ lib }),
+        position: require('./position').init({ lib }),
+        text: require('./text').init({ lib }),
     }
 
     return core;

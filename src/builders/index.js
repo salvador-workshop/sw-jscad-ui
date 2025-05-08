@@ -1,12 +1,12 @@
 const init = ({ lib, swLib }) => {
     const builders = {
         // Dependent on libs and utils
-        columnBuilder: require('./column-builder').init({ lib, swLib }),
-        wallBuilder: require('./wall-builder').init({ lib, swLib }),
+        columns: require('./columns').init({ lib, swLib }),
+        walls: require('./walls').init({ lib, swLib }),
     }
 
     // Dependent on libs, utils, and first builders
-    builders.entrywayBuilder = require('./entryway-builder').init({ lib, swLib: {...builders, ...swLib }});
+    builders.entryways = require('./entryways').init({ lib, swLib: {...builders, ...swLib }});
 
     return builders;
 }

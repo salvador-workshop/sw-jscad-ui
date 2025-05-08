@@ -1,6 +1,7 @@
 
 const init = ({ lib }) => {
     const utils = {
+        // Dependent on lib
         constants: require('./constants'),
         generalUtils: require('./general-utils'),
         geometryUtils: require('./geometry-utils'),
@@ -15,7 +16,7 @@ const init = ({ lib }) => {
         superPrimitives: require('./super-primitives').init({ lib }),
     }
 
-    // Dependent on other utils
+    // Dependent on lib and other utils
     utils.layoutUtils = require('./layout-utils').init({ lib, swLib: utils });
 
     return utils;

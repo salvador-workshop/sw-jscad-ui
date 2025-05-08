@@ -2,13 +2,13 @@
 const init = ({ lib, swLib }) => {
     const utils = {
         // Dependent on lib
-        transformUtils: require('./transform-utils').init({ lib }),
+        transform: require('./transform').init({ lib }),
         superPrimitives: require('./super-primitives').init({ lib }),
     }
 
     // Dependent on lib and core modules
-    utils.layoutUtils = require('./layout-utils').init({ lib, swLib: { ...utils, ...swLib } });
-    utils.geometryUtils = require('./geometry-utils').init({ lib, swLib: { ...utils, ...swLib } });
+    utils.layout = require('./layout').init({ lib, swLib: { ...utils, ...swLib } });
+    utils.geometry = require('./geometry').init({ lib, swLib: { ...utils, ...swLib } });
 
     return utils;
 }

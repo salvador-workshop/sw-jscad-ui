@@ -4,6 +4,8 @@ const init = ({ lib, swLib }) => {
         wallBuilder: require('./wall-builder').init({ lib, swLib }),
     }
 
+    builders.entrywayBuilder = require('./entryway-builder').init({ lib, swLib });
+
     return builders;
 }
 

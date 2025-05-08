@@ -1,5 +1,12 @@
 "use strict"
 
+//-----------
+// TO-DO
+//---------------------
+// - Cylinders with rounded corners
+// - Mesh shell primitives
+//---------------------
+
 const superPrimitives = ({ lib }) => {
     const { cuboid } = lib.primitives
     const { expand } = lib.expansions

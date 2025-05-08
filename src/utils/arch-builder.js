@@ -7,6 +7,7 @@ const archBuilder = ({ lib }) => {
   const { arc, cuboid } = lib.primitives
   const { translate, mirror, rotate, align } = lib.transforms
   const { union, subtract, intersect } = lib.booleans
+  const { measureDimensions } = lib.measurements;
 
   return {
     /**
@@ -35,7 +36,6 @@ const archBuilder = ({ lib }) => {
      * @param {Object} opts 
      * @param {number} opts.arcRadius - arc radius 
      * @param {number} opts.archWidth - arch width 
-     * @param {number} opts.profileWidth - width of 2D cross-section profile 
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
      */
     twoPt: (opts) => {
@@ -44,11 +44,8 @@ const archBuilder = ({ lib }) => {
 
       if (opts.geomProfile) {
         // 3D
-        // profileWidth prop may not be necessary.
-        // Can probably use Math.max(bboxLen1, bboxLen2) of the input geomProfile
-        const profileWth = opts.profileWidth;
-
-        const profile = translate([arcRad, 0, 0], opts.geomProfile);
+        const profileSpecs = measureDimensions(opts.geomProfile);
+        const profile = translate([profileSpecs[0] / 2 + arcRad, 0, 0], opts.geomProfile);
         const baseArch = extrudeRotate({ segments: 48, angle: Math.PI }, profile);
 
         const cutawaySize = Math.max(archWth, arcRad) * 2;
@@ -56,7 +53,7 @@ const archBuilder = ({ lib }) => {
         const cutawayOffset = (cutawaySize / -2) + mirrorAxis;
         const archCutaway = translate([cutawayOffset, cutawaySize / 2, 0], cuboid(
           {
-            size: [cutawaySize, cutawaySize, profileWth * 1.25],
+            size: [cutawaySize, cutawaySize, profileSpecs[1] * 1.25],
             center: [0, 0, 0]
           }
         ))

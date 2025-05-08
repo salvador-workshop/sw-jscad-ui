@@ -26,13 +26,13 @@ const wallBuilder = ({ lib, swLib }) => {
 
     const getEntryTrimForDadoUnits = ({ dadoUnits, trimUnitHeight, trimUnitDepth }) => {
         const tFamilyBasic = basicTrimFamily.build({ unitHeight: trimUnitHeight, unitDepth: trimUnitDepth });
-        let dadoProfile = tFamilyBasic.crown.small;
+        let entryTrim = tFamilyBasic.crown.small;
         if (dadoUnits === 1) {
-            dadoProfile = tFamilyBasic.crown.medium;
+            entryTrim = tFamilyBasic.crown.medium;
         } else if (dadoUnits === 2) {
-            dadoProfile = tFamilyBasic.crown.large;
+            entryTrim = tFamilyBasic.crown.large;
         }
-        return dadoProfile;
+        return entryTrim;
     }
 
     const verifyTrimUnits = ({ trimOpts, baseUnits, dadoUnits, crownUnits }) => {
@@ -131,15 +131,18 @@ const wallBuilder = ({ lib, swLib }) => {
 
             if (opts.trimOpts.includes('dado') && opts.half != 'upper') {
                 wallWithTrim = union(wallWithTrim, dadoWall);
+
+                let dadoProfile = tFamilyBasic.dado.small;
+                if (dadoUnits === 1) {
+                    dadoProfile = tFamilyBasic.dado.medium;
+                } else if (dadoUnits === 2) {
+                    dadoProfile = tFamilyBasic.dado.large;
+                }
                 const dadoTrimSpecs = [dadoWallSpecs[0] + opts.trimUnitDepth, dadoWallSpecs[1] + opts.trimUnitDepth];
                 const dTrim = align({ modes: ['center', 'center', 'max'], relativeTo: [0, 0, dadoHt] }, dadoTrim({
                     totalLength: dadoTrimSpecs[0],
                     totalThickness: dadoTrimSpecs[1],
-                    trimProfile: getEntryTrimForDadoUnits({
-                        dadoUnits,
-                        trimUnitHeight: opts.trimUnitHeight,
-                        trimUnitDepth: opts.trimUnitDepth,
-                    }),
+                    trimProfile: dadoProfile,
                 }));
                 wallWithTrim = union(wallWithTrim, dTrim);
             }

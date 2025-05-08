@@ -3,7 +3,7 @@
 const geometryUtils = ({ lib, swLib }) => {
     const {
         arrayCartesianProduct
-    } = swLib;
+    } = swLib.general;
 
     return {
         getTriangularPtsInArea: (x, y, radius) => {

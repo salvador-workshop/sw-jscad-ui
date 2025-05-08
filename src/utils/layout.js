@@ -1,6 +1,3 @@
-//---------------------------
-// L A Y O U T    U T I L S
-//---------------------------
 
 const layoutUtils = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;
@@ -8,7 +5,7 @@ const layoutUtils = ({ lib, swLib }) => {
     const { measureDimensions, measureVolume } = lib.measurements;
 
     const {
-        textUtils,
+        text,
     } = swLib
     const { frameCuboid } = swLib.superPrimitives;
 

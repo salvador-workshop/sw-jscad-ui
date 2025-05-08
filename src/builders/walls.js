@@ -5,32 +5,32 @@ const wallBuilder = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives
     const { measureDimensions, measureBoundingBox } = lib.measurements;
     const {
-        mouldBuilder,
-        basicTrimFamily,
+        moulds,
+        trimFamilyAranea,
     } = swLib
 
     const crownTrim = ({ totalThickness, totalLength, trimProfile }) => {
         const profileDims = measureDimensions(trimProfile);
-        return mouldBuilder.cuboidEdge({ size: [totalLength, totalThickness, profileDims[1]], geomProfile: trimProfile });
+        return moulds.cuboidEdge({ size: [totalLength, totalThickness, profileDims[1]], geomProfile: trimProfile });
     }
 
     const dadoTrim = ({ totalThickness, totalLength, trimProfile }) => {
         const profileDims = measureDimensions(trimProfile);
-        return mouldBuilder.cuboidEdge({ size: [totalLength, totalThickness, profileDims[1]], geomProfile: trimProfile });
+        return moulds.cuboidEdge({ size: [totalLength, totalThickness, profileDims[1]], geomProfile: trimProfile });
     }
 
     const baseTrim = ({ totalThickness, totalLength, trimProfile }) => {
         const profileDims = measureDimensions(trimProfile);
-        return mouldBuilder.cuboidEdge({ size: [totalLength, totalThickness, profileDims[1]], geomProfile: trimProfile });
+        return moulds.cuboidEdge({ size: [totalLength, totalThickness, profileDims[1]], geomProfile: trimProfile });
     }
 
     const getEntryTrimForDadoUnits = ({ dadoUnits, trimUnitHeight, trimUnitDepth }) => {
-        const tFamilyBasic = basicTrimFamily.build({ unitHeight: trimUnitHeight, unitDepth: trimUnitDepth });
-        let entryTrim = tFamilyBasic.crown.small;
+        const tFamilyAranea = trimFamilyAranea.build({ unitHeight: trimUnitHeight, unitDepth: trimUnitDepth });
+        let entryTrim = tFamilyAranea.crown.small;
         if (dadoUnits === 1) {
-            entryTrim = tFamilyBasic.crown.medium;
+            entryTrim = tFamilyAranea.crown.medium;
         } else if (dadoUnits === 2) {
-            entryTrim = tFamilyBasic.crown.large;
+            entryTrim = tFamilyAranea.crown.large;
         }
         return entryTrim;
     }
@@ -95,7 +95,7 @@ const wallBuilder = ({ lib, swLib }) => {
                 size: [opts.length, opts.thickness, opts.height],
             }));
 
-            const tFamilyBasic = basicTrimFamily.build({ unitHeight: opts.trimUnitHeight, unitDepth: opts.trimUnitDepth });
+            const tFamilyAranea = trimFamilyAranea.build({ unitHeight: opts.trimUnitHeight, unitDepth: opts.trimUnitDepth });
 
             const dadoHt = opts.dadoHeight || opts.height * (1 - swLib.constants.PHI_INV);
             // console.log(`    dadoHt = ${JSON.stringify(dadoHt)}`);
@@ -111,11 +111,11 @@ const wallBuilder = ({ lib, swLib }) => {
 
 
             if (opts.trimOpts.includes('base') && opts.half != 'upper') {
-                let baseProfile = tFamilyBasic.base.small;
+                let baseProfile = tFamilyAranea.base.small;
                 if (baseUnits === 1) {
-                    baseProfile = tFamilyBasic.base.medium;
+                    baseProfile = tFamilyAranea.base.medium;
                 } else if (baseUnits === 2) {
-                    baseProfile = tFamilyBasic.base.large;
+                    baseProfile = tFamilyAranea.base.large;
                 }
 
                 const baseAdj = (dadoUnits + baseUnits + 1) * 2 * opts.trimUnitDepth;
@@ -132,11 +132,11 @@ const wallBuilder = ({ lib, swLib }) => {
             if (opts.trimOpts.includes('dado') && opts.half != 'upper') {
                 wallWithTrim = union(wallWithTrim, dadoWall);
 
-                let dadoProfile = tFamilyBasic.dado.small;
+                let dadoProfile = tFamilyAranea.dado.small;
                 if (dadoUnits === 1) {
-                    dadoProfile = tFamilyBasic.dado.medium;
+                    dadoProfile = tFamilyAranea.dado.medium;
                 } else if (dadoUnits === 2) {
-                    dadoProfile = tFamilyBasic.dado.large;
+                    dadoProfile = tFamilyAranea.dado.large;
                 }
                 const dadoTrimSpecs = [dadoWallSpecs[0] + opts.trimUnitDepth, dadoWallSpecs[1] + opts.trimUnitDepth];
                 const dTrim = align({ modes: ['center', 'center', 'max'], relativeTo: [0, 0, dadoHt] }, dadoTrim({
@@ -148,11 +148,11 @@ const wallBuilder = ({ lib, swLib }) => {
             }
 
             if (opts.trimOpts.includes('crown') && opts.half != 'lower') {
-                let crownProfile = tFamilyBasic.crown.small;
+                let crownProfile = tFamilyAranea.crown.small;
                 if (crownUnits === 1) {
-                    crownProfile = tFamilyBasic.crown.medium;
+                    crownProfile = tFamilyAranea.crown.medium;
                 } else if (crownUnits === 2) {
-                    crownProfile = tFamilyBasic.crown.large;
+                    crownProfile = tFamilyAranea.crown.large;
                 }
 
                 const crownAdj = (crownUnits + 1) * 2 * opts.trimUnitDepth;

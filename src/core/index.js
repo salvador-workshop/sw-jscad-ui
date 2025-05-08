@@ -2,7 +2,6 @@
 const init = ({ lib }) => {
     const core = {
         constants: require('./constants'),
-        general: require('./general'),
         position: require('./position').init({ lib }),
         text: require('./text').init({ lib }),
     }

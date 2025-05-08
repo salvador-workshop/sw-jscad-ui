@@ -7,6 +7,7 @@ const init = ({ lib, swLib }) => {
     }
 
     // Dependent on lib and core modules
+    utils.math = require('./math').init({ lib, swLib: { ...utils, ...swLib } });
     utils.layout = require('./layout').init({ lib, swLib: { ...utils, ...swLib } });
     utils.geometry = require('./geometry').init({ lib, swLib: { ...utils, ...swLib } });
 

@@ -1,5 +1,5 @@
 const coreModule = require('./core');
-const uxModule = require('./utils');
+const uxModule = require('./ux');
 const utilsModule = require('./utils');
 const buildersCoreModule = require('./builders-core');
 const buildersModule = require('./builders');

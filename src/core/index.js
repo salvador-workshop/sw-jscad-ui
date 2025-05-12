@@ -7,7 +7,7 @@ const init = ({ lib }) => {
         text: require('./text').init({ lib }),
     }
 
-    core.internals = require('./internals').init({ lib, swLib: { ...swLib, ...core } });
+    core.internals = require('./internals').init({ lib, swLib: core });
 
     return core;
 }

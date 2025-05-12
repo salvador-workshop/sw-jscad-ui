@@ -14,6 +14,29 @@ const trimFamilyAranea = ({ lib }) => {
         return rotate([0, 0, Math.PI / 4], baseSquare);
     }
 
+    const extraSmall = ({ controlPoints, detailDepth, styleOpts }) => {
+        const cornerPt1 = controlPoints.l0.t1;
+        const cornerPt2 = controlPoints.lHalf.t1;
+        const baseShape = polygon({
+            points: [
+                controlPoints.l0.t0,
+                cornerPt1,
+                cornerPt2,
+                controlPoints.lHalf.t0,
+            ]
+        });
+        const baseCorner = detailCorner({ sideLength: detailDepth });
+        const corner1 = translate([...cornerPt1, 0], baseCorner);
+        const corner2 = translate([...cornerPt2, 0], baseCorner);
+
+        let cutShape = subtract(baseShape, corner1);
+        if (!['crown', 'base'].includes(styleOpts)) {
+            cutShape = subtract(cutShape, corner2);
+        }
+
+        return cutShape;
+    }
+
     const small = ({ controlPoints, detailDepth, styleOpts }) => {
         const cornerPt1 = controlPoints.l0.t1;
         const cornerPt2 = controlPoints.l1.t1;
@@ -181,6 +204,7 @@ const trimFamilyAranea = ({ lib }) => {
             thicknessPoints[`t${levelIdx}`] = unitDepth * levelIdx;
             ornamentPoints[`o${levelIdx + 1}`] = unitHeight * levelIdx + (unitHeight * PHI_INV);
         }
+        levelPoints[`lHalf`] = unitHeight / 2;
 
         console.log(levelPoints, thicknessPoints, ornamentPoints);
 
@@ -204,6 +228,7 @@ const trimFamilyAranea = ({ lib }) => {
         console.log(controlPoints);
 
         const crown = {
+            extraSmall: center({}, extraSmall({ controlPoints, detailDepth: dDepth, styleOpts: 'crown' })),
             small: center({}, small({ controlPoints, detailDepth: dDepth, styleOpts: 'crown' })),
             medium: center({}, medium({ controlPoints, detailDepth: dDepth, styleOpts: 'crown' })),
             large: center({}, large({ controlPoints, detailDepth: dDepth, styleOpts: 'crown' })),
@@ -212,6 +237,10 @@ const trimFamilyAranea = ({ lib }) => {
             largeOrn1: center({}, largeOrnament1({ controlPoints, detailDepth: dDepth, styleOpts: 'crown' })),
         };
         const dado = {
+            extraSmall: center({}, mirror(
+                { normal: [0, 1, 0] },
+                extraSmall({ controlPoints, detailDepth: dDepth, styleOpts })
+            )),
             small: center({}, mirror(
                 { normal: [0, 1, 0] },
                 small({ controlPoints, detailDepth: dDepth, styleOpts })
@@ -238,6 +267,10 @@ const trimFamilyAranea = ({ lib }) => {
             )),
         };
         const base = {
+            extraSmall: center({}, mirror(
+                { normal: [0, 1, 0] },
+                crown.extraSmall
+            )),
             small: center({}, mirror(
                 { normal: [0, 1, 0] },
                 crown.small

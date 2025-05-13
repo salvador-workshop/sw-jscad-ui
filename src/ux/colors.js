@@ -37,6 +37,27 @@ const colourUtils = ({ lib, swLib }) => {
         colours[`translucent${capColName}3`] = [...rgbVal, 0.7];
     }
 
+    colours.palette = {
+        light: {
+            default: colours.blue,
+            primary: colours.indigo,
+            secondary: colours.green,
+            tertiary: colours.pink,
+            layout: colours.translucentDeepOrange,
+            detail: colours.lightBlue,
+            guide: colours.translucentGrey,
+        },
+        dark: {
+            default: colours.blue,
+            primary: colours.indigo,
+            secondary: colours.green,
+            tertiary: colours.pink,
+            layout: colours.translucentDeepOrange,
+            detail: colours.lightBlue,
+            guide: colours.translucentGrey,
+        },
+    }
+
     return colours;
 }
 module.exports = { init: colourUtils }

@@ -3,12 +3,14 @@ const internals = ({ lib, swLib }) => {
     //-------------------
     // Master Prop List
 
+    // General
     const propListBasic = [
         { id: 'length', desc: 'length of element' },
         { id: 'width', desc: 'Width of element' },
         { id: 'height', desc: 'height of element' },
     ]
 
+    // Decorative details
     const propListDecorative = [
         { id: 'trimOpts', desc: 'array of string options' },
         { id: 'trimUnitSize', desc: '[x,y] of trim unit depth, and trim unit height' },
@@ -25,6 +27,14 @@ const internals = ({ lib, swLib }) => {
         { id: 'roofSpanSize', desc: 'length of element' },
         { id: 'roofOverhangSize', desc: 'Width of element' },
         { id: 'roofPitch', desc: 'height of element' },
+    ]
+
+    // Parameters used by building & design commands
+    const propListVariants = [
+        { id: 'family', desc: 'General grouping' },
+        { id: 'type', desc: 'Functional grouping' },
+        { id: 'subType', desc: 'Functional subgroup' },
+        { id: 'tagsVariants', desc: 'Extra options for variants' },
     ]
 
     const masterPropList = [
@@ -49,6 +59,7 @@ const internals = ({ lib, swLib }) => {
         propListBasic,
         propListWall,
         propListRoof,
+        propListVariants,
         masterPropList,
         colourList,
         layerList,

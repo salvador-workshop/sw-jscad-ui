@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace entryways
+ */
 
 const entrywayBuilder = ({ lib, swLib }) => {
     const { union, subtract, intersect } = lib.booleans;

@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * ...
+ * @namespace trimFamilyAranea
+ */
+
 const trimFamilyAranea = ({ lib }) => {
     const { polygon, square } = lib.primitives
     const { subtract, union } = lib.booleans

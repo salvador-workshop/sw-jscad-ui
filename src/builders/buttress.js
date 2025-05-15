@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace buttress
+ */
 
 const buttressBuilder = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;

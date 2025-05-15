@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: columns</title>
+    <title>JSDoc: Namespace: trimFamilyAranea</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: columns</h1>
+    <h1 class="page-title">Namespace: trimFamilyAranea</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>columns</h2>
+        <h2>trimFamilyAranea</h2>
         
     
 </header>
@@ -37,7 +37,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Builds columns. Input 2D profiles must be centred at (0, 0, 0)</div>
+            <div class="description">...</div>
         
 
         
@@ -72,7 +72,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_columns.js.html">builders/columns.js</a>, <a href="builders_columns.js.html#line3">line 3</a>
+        <a href="builders-core_trim-family-aranea.js.html">builders-core/trim-family-aranea.js</a>, <a href="builders-core_trim-family-aranea.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -111,7 +111,7 @@
     
 
     
-    <h4 class="name" id="threePt"><span class="type-signature"></span>threePt<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~build"><span class="type-signature">(inner) </span>build<span class="signature">(opts)</span><span class="type-signature"></span></h4>
     
 
     
@@ -119,7 +119,7 @@
 
 
 <div class="description">
-    Builds a three-part column using the specified dimensions and styles.
+    Creates a set of trimwork profiles
 </div>
 
 
@@ -197,76 +197,7 @@
 
         <tr>
             
-                <td class="name"><code>base</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;(string|number|geom2.Geom2|null)></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">specs for column base (style, height, radius, geomProfile)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>shaft</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;(string|number|geom2.Geom2|null)></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">specs for column shaft (style, radius, geomProfile)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>capital</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;(string|number|geom2.Geom2|null)></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">specs for column capital (style, height, radius, geomProfile)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
+                <td class="name"><code>unitHeight</code></td>
             
 
             <td class="type">
@@ -282,7 +213,76 @@
 
             
 
-            <td class="description last">total height of column</td>
+            <td class="description last">Typical height for basic trim unit</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>unitDepth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Typical depth for basic trim unit</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>detailDepth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Size of corner details (mm). Defaults to 1/3 of `unitDepth`</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>styleOpts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Style options ("base", "crown", "dado"). Defaults to "dado"</td>
         </tr>
 
     
@@ -330,7 +330,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders_columns.js.html">builders/columns.js</a>, <a href="builders_columns.js.html#line123">line 123</a>
+        <a href="builders-core_trim-family-aranea.js.html">builders-core/trim-family-aranea.js</a>, <a href="builders-core_trim-family-aranea.js.html#line194">line 194</a>
     </li></ul></dd>
     
 

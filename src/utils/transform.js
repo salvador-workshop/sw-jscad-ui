@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * ...
+ * @namespace transform
+ */
+
 const transformUtils = ({ lib }) => {
     const { subtract } = lib.booleans
     const { measureDimensions } = lib.measurements;

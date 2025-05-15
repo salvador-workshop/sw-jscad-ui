@@ -1,3 +1,10 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace colors
+ */
+
 // Original color palette by
 // https://www.google.com/design/spec/style/color.html
 

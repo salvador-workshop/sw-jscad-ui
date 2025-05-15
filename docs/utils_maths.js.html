@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utils/maths.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utils/maths.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict"
+
+/**
+ * ...
+ * @namespace maths
+ */
+
+const arrayCartesianProduct = (a, b) => a.reduce((acc, x) => [...acc, ...b.map(y => [x, y])], []);
+
+const mathUtils = ({ lib, swLib }) => {
+    const {
+        INCHES_MM_FACTOR
+    } = swLib.constants;
+
+    return {
+        isEven: (n) => {
+            return n % 2 == 0;
+        },
+        isOdd: (n) => {
+            return Math.abs(n % 2) == 1;
+        },
+        arrayCartesianProduct,
+        inchesToMM: (numInches) => numInches * INCHES_MM_FACTOR,
+        mmToInches: (numMils) => numMils / INCHES_MM_FACTOR,
+        factorize: (num) => {
+            const int1 = Math.floor(Math.sqrt(num));
+            const rem = num % int1
+            if (rem === 0) {
+                return [int1, int1]
+            }
+            const int2 = (num - rem) / int1
+            return [int1, int2 + 1]
+        },
+    }
+}
 
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = { init: mathUtils };
+</code></pre>
+        </article>
+    </section>
 
 
 

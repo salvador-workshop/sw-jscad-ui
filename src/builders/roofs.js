@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace roofs
+ */
 
 const roofBuilder = ({ lib, swLib }) => {
     const { union, subtract } = lib.booleans;

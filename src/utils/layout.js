@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace layout
+ */
 
 const layoutUtils = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;

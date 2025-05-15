@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace buttress
+ */
 
 const buttressBuilder = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;
@@ -5,6 +11,8 @@ const buttressBuilder = ({ lib, swLib }) => {
     return {
         /**
          * Builds a buttress/pilaster.
+         * @memberof buttress
+         * @instance
          * @param {Object} opts 
          * @param {number} opts.height
          * @param {number} opts.thickness

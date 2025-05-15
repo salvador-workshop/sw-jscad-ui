@@ -1,3 +1,12 @@
-const placeholder = 'This is a placeholder module';
+"use strict"
 
-module.exports = { init: () => { placeholder } };
+/**
+ * Coming soon...
+ * @namespace layers
+ */
+
+const layersInit = ({ lib, swLib }) => {
+    return {}
+}
+
+module.exports = { init: layersInit };

@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * ...
+ * @namespace superPrimitives
+ */
+
 //-----------
 // TO-DO
 //---------------------
@@ -7,7 +12,7 @@
 // - Mesh shell primitives
 //---------------------
 
-const superPrimitives = ({ lib }) => {
+const superPrimitivesInit = ({ lib }) => {
     const { cuboid } = lib.primitives
     const { expand } = lib.expansions
     const { translate } = lib.transforms
@@ -22,4 +27,4 @@ const superPrimitives = ({ lib }) => {
     }
 }
 
-module.exports = { init: superPrimitives };
+module.exports = { init: superPrimitivesInit };

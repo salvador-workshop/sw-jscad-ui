@@ -28,6 +28,13 @@
         <article>
             <pre class="prettyprint source linenums"><code>"use strict"
 
+/**
+ * Builds cross-section profiles in gothic style.
+ * Output profiles are centred at (0, 0, 0).
+ * Edge profiles have a 1mm margin between all details and the flat (host) side.
+ * @namespace profiles
+ */
+
 const EDGE_PROFILE_MARGIN = 1;
 
 const profileBuilder = ({ lib }) => {
@@ -38,6 +45,8 @@ const profileBuilder = ({ lib }) => {
   return {
     /**
      * Square with circular notches at corners.
+     * @memberof profiles
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.sqLength - side length for bounding square 
      * @param {number} opts.notchRadius - radius of circular notch
@@ -64,6 +73,8 @@ const profileBuilder = ({ lib }) => {
     },
     /**
      * Square with circles at corners.
+     * @memberof profiles
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.sqLength - side length for bounding square 
      * @param {number} opts.cornerRadius - radius of circular corner
@@ -92,6 +103,8 @@ const profileBuilder = ({ lib }) => {
     },
     /**
      * Octagonal
+     * @memberof profiles
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.sqLength - side length for bounding square 
      */
@@ -106,14 +119,16 @@ const profileBuilder = ({ lib }) => {
     },
     /**
     * Edge profiles
-    * @alias module:profileBuilder.edge
+    * @memberof profiles
+    * @instance
     * @type {object}
     */
     edge: {
       /**
        * Edge profile: Circular notch in bottom half
-       * @alias module:profileBuilder.edge.circNotch
-       * @function circNotch
+       * @memberof profiles
+       * @alias edge.circNotch
+       * @instance
        * @param {Object} opts 
        * @param {number} opts.totalThickness - total thickness of edge
        * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
@@ -149,8 +164,9 @@ const profileBuilder = ({ lib }) => {
       },
       /**
        * Edge profile: Circular portrusion in bottom half
-       * @alias module:profileBuilder.edge.circPortrusion
-       * @function circPortrusion
+       * @memberof profiles
+       * @alias edge.circPortrusion
+       * @instance
        * @param {Object} opts 
        * @param {number} opts.totalThickness - total thickness of edge
        * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
@@ -192,13 +208,6 @@ const profileBuilder = ({ lib }) => {
   }
 }
 
-/**
- * Builds cross-section profiles in gothic style.
- * Output profiles are centred at (0, 0, 0).
- * Edge profiles have a 1mm margin between all details and the flat (host) side.
- * @module profileBuilder
- * @version 2.0.0
- */
 module.exports = { init: profileBuilder }
 </code></pre>
         </article>
@@ -210,13 +219,13 @@ module.exports = { init: profileBuilder }
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-archBuilder.html">archBuilder</a></li><li><a href="module-builders.html">builders</a></li><li><a href="module-buildersCore.html">buildersCore</a></li><li><a href="module-columnBuilder.html">columnBuilder</a></li><li><a href="module-core.html">core</a></li><li><a href="module-foilBuilder.html">foilBuilder</a></li><li><a href="module-mouldBuilder.html">mouldBuilder</a></li><li><a href="module-profileBuilder.html">profileBuilder</a></li><li><a href="module-utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addToLayout">addToLayout</a></li><li><a href="global.html#bisect3d">bisect3d</a></li><li><a href="global.html#build">build</a></li><li><a href="global.html#buildGothic">buildGothic</a></li><li><a href="global.html#cinquefoil">cinquefoil</a></li><li><a href="global.html#circNotch">circNotch</a></li><li><a href="global.html#circPortrusion">circPortrusion</a></li><li><a href="global.html#circularEdge">circularEdge</a></li><li><a href="global.html#cuboidEdge">cuboidEdge</a></li><li><a href="global.html#cutCircularSlice">cutCircularSlice</a></li><li><a href="global.html#measure">measure</a></li><li><a href="global.html#octagonal">octagonal</a></li><li><a href="global.html#octofoil">octofoil</a></li><li><a href="global.html#onePt">onePt</a></li><li><a href="global.html#quatrefoil">quatrefoil</a></li><li><a href="global.html#sexfoil">sexfoil</a></li><li><a href="global.html#sqCornerCircNotch">sqCornerCircNotch</a></li><li><a href="global.html#sqCornerCircles">sqCornerCircles</a></li><li><a href="global.html#sunkenPanelCirc">sunkenPanelCirc</a></li><li><a href="global.html#sunkenPanelRect">sunkenPanelRect</a></li><li><a href="global.html#threePt">threePt</a></li><li><a href="global.html#trefoil">trefoil</a></li><li><a href="global.html#twoPt">twoPt</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="arches.html">arches</a></li><li><a href="buttress.html">buttress</a></li><li><a href="colors.html">colors</a></li><li><a href="columns.html">columns</a></li><li><a href="entryways.html">entryways</a></li><li><a href="foils.html">foils</a></li><li><a href="geometry.html">geometry</a></li><li><a href="layers.html">layers</a></li><li><a href="layout.html">layout</a></li><li><a href="maths.html">maths</a></li><li><a href="moulds.html">moulds</a></li><li><a href="profiles.html">profiles</a></li><li><a href="roofs.html">roofs</a></li><li><a href="superPrimitives.html">superPrimitives</a></li><li><a href="transform.html">transform</a></li><li><a href="trimFamilyAranea.html">trimFamilyAranea</a></li><li><a href="walls.html">walls</a></li></ul><h3>Global</h3><ul><li><a href="global.html#measure">measure</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu May 15 2025 07:31:39 GMT-0400 (Eastern Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu May 15 2025 08:45:27 GMT-0400 (Eastern Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * ...
+ * @namespace geometry
+ */
+
 const geometryUtils = ({ lib, swLib }) => {
     const {
         arrayCartesianProduct

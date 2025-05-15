@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace layout
+ */
 
 const layoutUtils = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;
@@ -185,6 +191,8 @@ const layoutUtils = ({ lib, swLib }) => {
     return {
         /**
          * Adds element to layout
+         * @memberof layout
+         * @instance
          * @param {Object} opts 
          * @param {string} opts.name 
          * @param {string} opts.desc 

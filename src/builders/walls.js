@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace walls
+ */
 
 const wallBuilder = ({ lib, swLib }) => {
     const { union, subtract } = lib.booleans
@@ -62,6 +68,8 @@ const wallBuilder = ({ lib, swLib }) => {
         verifyTrimUnits,
         /**
          * Builds a wall.
+         * @memberof walls
+         * @instance
          * @param {Object} opts 
          * @param {number} opts.length
          * @param {number} opts.thickness

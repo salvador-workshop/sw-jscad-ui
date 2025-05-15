@@ -1,3 +1,9 @@
+"use strict"
+
+/**
+ * ...
+ * @namespace entryways
+ */
 
 const entrywayBuilder = ({ lib, swLib }) => {
     const { union, subtract, intersect } = lib.booleans;
@@ -15,7 +21,9 @@ const entrywayBuilder = ({ lib, swLib }) => {
 
     return {
         /**
-         * Builds an entryway.
+         * Builds a gothic entryway.
+         * @memberof entryways
+         * @instance
          * @param {Object} opts 
          * @param {number} opts.wallLength
          * @param {number} opts.wallThickness

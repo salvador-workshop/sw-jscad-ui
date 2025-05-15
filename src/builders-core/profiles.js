@@ -1,5 +1,12 @@
 "use strict"
 
+/**
+ * Builds cross-section profiles in gothic style.
+ * Output profiles are centred at (0, 0, 0).
+ * Edge profiles have a 1mm margin between all details and the flat (host) side.
+ * @namespace profiles
+ */
+
 const EDGE_PROFILE_MARGIN = 1;
 
 const profileBuilder = ({ lib }) => {
@@ -10,6 +17,8 @@ const profileBuilder = ({ lib }) => {
   return {
     /**
      * Square with circular notches at corners.
+     * @memberof profiles
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.sqLength - side length for bounding square 
      * @param {number} opts.notchRadius - radius of circular notch
@@ -36,6 +45,8 @@ const profileBuilder = ({ lib }) => {
     },
     /**
      * Square with circles at corners.
+     * @memberof profiles
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.sqLength - side length for bounding square 
      * @param {number} opts.cornerRadius - radius of circular corner
@@ -64,6 +75,8 @@ const profileBuilder = ({ lib }) => {
     },
     /**
      * Octagonal
+     * @memberof profiles
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.sqLength - side length for bounding square 
      */
@@ -78,14 +91,16 @@ const profileBuilder = ({ lib }) => {
     },
     /**
     * Edge profiles
-    * @alias module:profileBuilder.edge
+    * @memberof profiles
+    * @instance
     * @type {object}
     */
     edge: {
       /**
        * Edge profile: Circular notch in bottom half
-       * @alias module:profileBuilder.edge.circNotch
-       * @function circNotch
+       * @memberof profiles
+       * @alias edge.circNotch
+       * @instance
        * @param {Object} opts 
        * @param {number} opts.totalThickness - total thickness of edge
        * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
@@ -121,8 +136,9 @@ const profileBuilder = ({ lib }) => {
       },
       /**
        * Edge profile: Circular portrusion in bottom half
-       * @alias module:profileBuilder.edge.circPortrusion
-       * @function circPortrusion
+       * @memberof profiles
+       * @alias edge.circPortrusion
+       * @instance
        * @param {Object} opts 
        * @param {number} opts.totalThickness - total thickness of edge
        * @param {number} opts.topThickness - thickness of top (left intact by ornaments)
@@ -164,11 +180,4 @@ const profileBuilder = ({ lib }) => {
   }
 }
 
-/**
- * Builds cross-section profiles in gothic style.
- * Output profiles are centred at (0, 0, 0).
- * Edge profiles have a 1mm margin between all details and the flat (host) side.
- * @module profileBuilder
- * @version 2.0.0
- */
 module.exports = { init: profileBuilder }

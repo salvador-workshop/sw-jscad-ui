@@ -12,10 +12,4 @@ const init = ({ lib, swLib }) => {
     return buildersCore;
 }
 
-/**
- * Collection of util functions
- * @module buildersCore
- * @example
- * const { geometryUtils, positionUtils } = require('sw-jscad')
- */
 module.exports = { init };

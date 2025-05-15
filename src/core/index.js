@@ -12,11 +12,3 @@ const init = ({ lib }) => {
 
     return core;
 }
-
-/**
- * Collection of util functions
- * @module core
- * @example
- * const { geometryUtils, positionUtils } = require('sw-jscad')
- */
-module.exports = { init };

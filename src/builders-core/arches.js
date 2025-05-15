@@ -1,5 +1,9 @@
-
 "use strict"
+
+/**
+ * Builds circle-based arches. Input 2D profiles must be centred at (0, 0, 0)
+ * @namespace arches
+ */
 
 const archBuilder = ({ lib }) => {
   const { path2, geom2 } = lib.geometries
@@ -12,6 +16,8 @@ const archBuilder = ({ lib }) => {
   return {
     /**
      * Builds a one-centre (semicircular) arch.
+     * @memberof arches
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.arcRadius - arc radius 
      * @param {geom2.Geom2} opts.geomProfile - 2D cross-section profile
@@ -33,6 +39,8 @@ const archBuilder = ({ lib }) => {
     },
     /**
      * Builds a two-centre pointed arch.
+     * @memberof arches
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.arcRadius - arc radius 
      * @param {number} opts.archWidth - arch width 
@@ -91,9 +99,4 @@ const archBuilder = ({ lib }) => {
   }
 }
 
-/**
- * Builds circle-based arches. Input 2D profiles must be centred at (0, 0, 0)
- * @module archBuilder
- * @version 2.0.0
- */
 module.exports = { init: archBuilder }

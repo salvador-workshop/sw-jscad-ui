@@ -13,10 +13,4 @@ const init = ({ lib, swLib }) => {
     return builders;
 }
 
-/**
- * Collection of builder functions
- * @module builders
- * @example
- * const { archBuilder, columnBuilder } = require('sw-jscad').builders
- */
 module.exports = { init };

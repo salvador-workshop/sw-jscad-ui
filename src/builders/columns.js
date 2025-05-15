@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * Builds columns. Input 2D profiles must be centred at (0, 0, 0)
+ * @namespace columns
+ */
+
 const columnBuilder = ({ lib, swLib }) => {
   const { cuboid, roundedCylinder, cylinder } = lib.primitives
   const { align } = lib.transforms
@@ -107,6 +112,8 @@ const columnBuilder = ({ lib, swLib }) => {
     columnPartBuilder,
     /**
      * Builds a three-part column using the specified dimensions and styles.
+     * @memberof columns
+     * @instance
      * @param {Object} opts
      * @param {Array<string|number|geom2.Geom2|null>} opts.base - specs for column base (style, height, radius, geomProfile)
      * @param {Array<string|number|geom2.Geom2|null>} opts.shaft - specs for column shaft (style, radius, geomProfile)
@@ -147,9 +154,4 @@ const columnBuilder = ({ lib, swLib }) => {
   }
 }
 
-/**
- * Builds columns. Input 2D profiles must be centred at (0, 0, 0)
- * @module columnBuilder
- * @version 3.0.0
- */
 module.exports = { init: columnBuilder };

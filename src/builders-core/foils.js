@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * Builds "foil" shapes such as trefoils, quatrefoils, cinquefoils, etc. Input 2D profiles must be centred at (0, 0, 0)
+ * @namespace foils
+ */
+
 const foilBuilder = ({ lib }) => {
     const { union, subtract, scission } = lib.booleans
     const { rotate, align, translate, mirror } = lib.transforms
@@ -9,6 +14,8 @@ const foilBuilder = ({ lib }) => {
 
     /**
      * Builds a 2D n-foil opening
+     * @memberof foils
+     * @instance
      * @param {Object} opts
      * @param {number} opts.numLobes - number of lobes
      * @param {number} opts.radius - radius of container circle
@@ -60,6 +67,8 @@ const foilBuilder = ({ lib }) => {
 
     /**
      * Builds a 3D n-foil opening using a given 2D cross-section profile
+     * @memberof foils
+     * @instance
      * @param {Object} opts
      * @param {number} opts.numLobes - number of lobes
      * @param {number} opts.radius - radius of container circle
@@ -140,6 +149,8 @@ const foilBuilder = ({ lib }) => {
         buildFoil3d,
         /**
          * Builds a trefoil opening using a given 2d cross-section profile
+         * @memberof foils
+         * @instance
          * @param {Object} opts
          * @param {number} opts.radius - radius of container circle
          * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
@@ -155,6 +166,8 @@ const foilBuilder = ({ lib }) => {
         },
         /**
          * Builds a quatrefoil opening using a given 2d cross-section profile
+         * @memberof foils
+         * @instance
          * @param {Object} opts
          * @param {number} opts.radius - radius of container circle
          * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
@@ -170,6 +183,8 @@ const foilBuilder = ({ lib }) => {
         },
         /**
          * Builds a cinquefoil opening using a given 2d cross-section profile
+         * @memberof foils
+         * @instance
          * @param {Object} opts
          * @param {number} opts.radius - radius of container circle
          * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
@@ -185,6 +200,8 @@ const foilBuilder = ({ lib }) => {
         },
         /**
          * Builds a sexfoil opening using a given 2d cross-section profile
+         * @memberof foils
+         * @instance
          * @param {Object} opts
          * @param {number} opts.radius - radius of container circle
          * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
@@ -200,6 +217,8 @@ const foilBuilder = ({ lib }) => {
         },
         /**
          * Builds an octofoil opening using a given 2d cross-section profile
+         * @memberof foils
+         * @instance
          * @param {Object} opts
          * @param {number} opts.radius - radius of container circle
          * @param {string} opts.lobeRadiusType - "inSlice", "halfRadius", "mean"
@@ -216,9 +235,4 @@ const foilBuilder = ({ lib }) => {
     }
 }
 
-/**
- * Builds "foil" shapes such as trefoils, quatrefoils, cinquefoils, etc. Input 2D profiles must be centred at (0, 0, 0)
- * @module foilBuilder
- * @version 2.0.0
- */
 module.exports = { init: foilBuilder };

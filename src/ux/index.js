@@ -9,10 +9,4 @@ const init = ({ lib, swLib }) => {
     return ux;
 }
 
-/**
- * Collection of util functions
- * @module utils
- * @example
- * const { geometryUtils, positionUtils } = require('sw-jscad')
- */
 module.exports = { init };

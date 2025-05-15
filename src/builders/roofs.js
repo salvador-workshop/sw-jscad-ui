@@ -51,6 +51,8 @@ const roofBuilder = ({ lib, swLib }) => {
 
     /**
      * Builds a gable roof
+     * @memberof roofs
+     * @instance
      * @param {Object} opts 
      * @param {number[]} opts.roofSpanSize - [x,y] size of area to be spanned
      * @param {number[]} opts.roofOverhangSize - [x,y] size for overhangs
@@ -115,6 +117,8 @@ const roofBuilder = ({ lib, swLib }) => {
 
     /**
      * Builds a hip roof
+     * @memberof roofs
+     * @instance
      * @param {Object} opts 
      * @param {number[]} opts.roofSpanSize - [x,y] size of area to be spanned
      * @param {number} opts.roofPitch - Roof pitch angle, expressed in radians
@@ -133,6 +137,8 @@ const roofBuilder = ({ lib, swLib }) => {
 
     /**
      * Builds a shed roof
+     * @memberof roofs
+     * @instance
      * @param {Object} opts 
      * @param {number[]} opts.roofSpanSize - [x,y] size of area to be spanned
      * @param {number[]} opts.roofOverhangSize - [x,y] size for overhangs

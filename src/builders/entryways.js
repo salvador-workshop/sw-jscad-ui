@@ -21,7 +21,9 @@ const entrywayBuilder = ({ lib, swLib }) => {
 
     return {
         /**
-         * Builds an entryway.
+         * Builds a gothic entryway.
+         * @memberof entryways
+         * @instance
          * @param {Object} opts 
          * @param {number} opts.wallLength
          * @param {number} opts.wallThickness

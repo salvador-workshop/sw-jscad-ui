@@ -15,6 +15,8 @@ const transformUtils = ({ lib }) => {
     return {
         /**
          * Cuts a given geometry in half.
+         * @memberof transform
+         * @instance
          * @param {Object} opts
          * @param {Object} opts.geom - Object we're cutting
          * @param {string} opts.axis - Axis direction pointing to the remaining geometry. This could be negative, specified like "x" or "-y"
@@ -59,6 +61,8 @@ const transformUtils = ({ lib }) => {
         },
         /**
          * Cuts a slice of an object
+         * @memberof transform
+         * @instance
          * @param {Object} opts
          * @param {Object} opts.geom - Object we're cutting
          * @param {number} opts.centralAngle

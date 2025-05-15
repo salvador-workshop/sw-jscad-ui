@@ -185,6 +185,8 @@ const trimFamilyAranea = ({ lib }) => {
 
     /**
      * Creates a set of trimwork profiles
+     * @memberof trimFamilyAranea
+     * @instance
      * @param {Object} opts 
      * @param {number} opts.unitHeight - Typical height for basic trim unit
      * @param {number} opts.unitDepth - Typical depth for basic trim unit

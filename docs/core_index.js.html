@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: profileBuilder</title>
+    <title>JSDoc: Source: core/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,211 +17,40 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: profileBuilder</h1>
+    <h1 class="page-title">Source: core/index.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">Builds cross-section profiles in gothic style.Output profiles are centred at (0, 0, 0).Edge profiles have a 1mm margin between all details and the flat (host) side.</div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>2.0.0</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders-core_profiles.js.html">builders-core/profiles.js</a>, <a href="builders-core_profiles.js.html#line167">line 167</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id=".edge"><span class="type-signature">(static) </span>edge<span class="type-signature"> :object</span></h4>
-
-
-
-
-<div class="description">
-    Edge profiles
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="builders-core_profiles.js.html">builders-core/profiles.js</a>, <a href="builders-core_profiles.js.html#line84">line 84</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+const init = ({ lib }) => {
+    const core = {
+        constants: require('./constants'),
+        errors: require('./errors'),
+        position: require('./position').init({ lib }),
+        text: require('./text').init({ lib }),
+    }
+
+    core.internals = require('./internals').init({ lib, swLib: core });
+    core.parts = require('./parts').init({ lib, swLib: core });
+
+    return core;
+}
+
+/**
+ * Collection of util functions
+ * @module core
+ * @example
+ * const { geometryUtils, positionUtils } = require('sw-jscad')
+ */
+module.exports = { init };
+</code></pre>
+        </article>
+    </section>
 
 
 

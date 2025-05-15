@@ -1,5 +1,12 @@
 "use strict"
 
+/**
+ * Builds positive mouldings and negative moulds for various ornaments.
+ * These would then be subtracted from a shape to produce the final result.
+ * Input 2D profiles must be centred at (0, 0, 0)
+ * @namespace moulds
+ */
+
 const mouldBuilder = ({ lib }) => {
   const { measureBoundingBox } = lib.measurements
   const { extrudeLinear, extrudeRotate } = lib.extrusions
@@ -9,6 +16,8 @@ const mouldBuilder = ({ lib }) => {
 
   /**
    * Builds a cuboid with given 2D profile placed on one edge.
+   * @memberof moulds
+   * @instance
    * @param {Object} opts
    * @param {number[]} opts.size - size (x, y, z)
    * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
@@ -31,6 +40,8 @@ const mouldBuilder = ({ lib }) => {
     cuboidOneEdge,
     /**
      * Positive moulding for a cuboid with the given 2D profile placed onto all the side edges.
+     * @memberof moulds
+     * @instance
      * @param {Object} opts
      * @param {number[]} opts.size - size (x, y, z)
      * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile
@@ -51,6 +62,8 @@ const mouldBuilder = ({ lib }) => {
     },
     /**
      * Positive moulding for a cylinder with the given 2D profile placed onto the edge.
+     * @memberof moulds
+     * @instance
      * @param {Object} opts
      * @param {number} opts.radius - Cylinder radius.
      * @param {number} opts.height - Cylinder height.
@@ -71,6 +84,8 @@ const mouldBuilder = ({ lib }) => {
     },
     /**
      * Negative mould for a rectangular sunken panel, to be placed on a wall/ceiling surface
+     * @memberof moulds
+     * @instance
      * @param {Object} opts
      * @param {number[]} opts.edge - size (x, y)
      * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile for edge
@@ -80,6 +95,8 @@ const mouldBuilder = ({ lib }) => {
     },
     /**
      * Negative mould for a circular sunken panel, to be placed on a wall/ceiling surface
+     * @memberof moulds
+     * @instance
      * @param {Object} opts
      * @param {number} opts.radius - panel radius
      * @param {geom2.Geom2} opts.geomProfile - 2D positive cross-section profile for edge
@@ -90,11 +107,4 @@ const mouldBuilder = ({ lib }) => {
   }
 }
 
-/**
- * Builds positive mouldings and negative moulds for various ornaments.
- * These would then be subtracted from a shape to produce the final result.
- * Input 2D profiles must be centred at (0, 0, 0)
- * @module mouldBuilder
- * @version 1.0.0
- */
 module.exports = { init: mouldBuilder }

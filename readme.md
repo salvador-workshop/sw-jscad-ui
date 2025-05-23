@@ -3,7 +3,8 @@
 Salvador Workshop's JSCAD utilities and toolkit.
 
 Online viewer: https://sw-jscad-viewer.netlify.app/  
-`sw-jscad` docs: https://salvador-workshop.github.io/sw-jscad/
+Docs: https://salvador-workshop.github.io/sw-jscad/  
+NPM package: https://www.npmjs.com/package/sw-jscad
 
 ## Usage
 

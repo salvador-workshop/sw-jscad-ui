@@ -13,3 +13,5 @@ const init = ({ lib, swLib }) => {
 
     return utils;
 }
+
+module.exports = { init };

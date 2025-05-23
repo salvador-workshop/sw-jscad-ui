@@ -12,3 +12,5 @@ const init = ({ lib }) => {
 
     return core;
 }
+
+module.exports = { init };

@@ -67,7 +67,7 @@ const roofBuilder = ({ lib, swLib }) => {
         roofOverhangSize = [1, 1],
         roofPitch,
         roofAxis = 'x',
-        roofOpts = ['solid'],
+        roofOpts = [],
         wallThickness,
         trimFamily = 'Aranea',
         trimUnitSize,
@@ -85,6 +85,7 @@ const roofBuilder = ({ lib, swLib }) => {
         console.log(`    basicRoofSpecs = ${JSON.stringify(basicRoofSpecs)}`);
         console.log(`    roofSpanSize = ${JSON.stringify(roofSpanSize)}, roofSpanHalfSize = ${JSON.stringify(roofSpanHalfSize)}`);
 
+        const halfRoofOpts = [...roofOpts, 'gableMode'];
         const halfOffset = roofAxis === 'x' ?
             [-roofSpanHalfSize[0] / 2, -roofSpanHalfSize[1], basicRoofSpecs[roofAxis].gableRoofHeight / -2] :
             [roofSpanHalfSize[0], roofSpanHalfSize[1] / -2, basicRoofSpecs[roofAxis].gableRoofHeight / -2];
@@ -93,7 +94,7 @@ const roofBuilder = ({ lib, swLib }) => {
             roofOverhangSize,
             roofPitch,
             roofAxis,
-            roofOpts,
+            roofOpts: halfRoofOpts,
             wallThickness,
             trimFamily,
             trimUnitSize,
@@ -129,7 +130,7 @@ const roofBuilder = ({ lib, swLib }) => {
     const buildHipRoof = ({
         roofSpanSize,
         roofPitch,
-        roofOpts = ['solid'],
+        roofOpts = [],
         wallThickness,
     }) => {
         return null;
@@ -153,7 +154,7 @@ const roofBuilder = ({ lib, swLib }) => {
         roofOverhangSize = [1, 1],
         roofPitch,
         roofAxis = 'x',
-        roofOpts = ['solid'],
+        roofOpts = [],
         wallThickness,
         trimFamily = 'Aranea',
         trimUnitSize,
@@ -173,15 +174,27 @@ const roofBuilder = ({ lib, swLib }) => {
         const roofHeight = basicRoofSpecs[roofAxis].shedRoofHeight;
         const roofHypot = basicRoofSpecs[roofAxis].shedRoofHypot;
 
-        const roomSize = [roofSpanSize[mainAxisIdx] - (2 * wallThickness), roofSpanSize[otherAxisIdx] - (2 * wallThickness), roofHeight];
-
         const baseTriangle = triangle({ type: 'SAS', values: [roofSpan, Math.PI / 2, roofHeight] });
         const basePrism = colorize(swLib.colors.translucentYellow, align({ modes: ['center', 'center', 'min'] }, rotate(
             [Math.PI / 2, 0, Math.PI / 2],
             extrudeLinear({ height: roofSpanSize[mainAxisIdx] }, baseTriangle)
         )));
-        const roomCutaway = align({ modes: ['center', 'center', 'min'] }, cuboid({ size: roomSize }));
-        const cutBasePrism = align({ modes: ['min', 'min', 'min'] }, subtract(basePrism, roomCutaway));
+
+        let roofSupport = align({ modes: ['min', 'min', 'min'] }, basePrism);
+        if (!roofOpts.includes('solid')) {
+            console.log('gburehrhe')
+            const wallThicknessOffset = roofOpts.includes('gableMode') ? 1 : 2;
+            let roomSize = [
+                roofSpanSize[mainAxisIdx] - (2 * wallThickness),
+                roofSpanSize[otherAxisIdx] - (wallThicknessOffset * wallThickness),
+                roofHeight
+            ];
+            let roomCutaway = align({ modes: ['center', 'center', 'min'] }, cuboid({ size: roomSize }));
+            if (roofOpts.includes('gableMode')) {
+                roomCutaway = translate([0, wallThickness / 2, 0], roomCutaway);
+            }
+            roofSupport = align({ modes: ['min', 'min', 'min'] }, subtract(basePrism, roomCutaway));
+        }
 
         // Roof Assembly
 
@@ -218,7 +231,7 @@ const roofBuilder = ({ lib, swLib }) => {
         const rotatedRoofAssembly = rotate([roofPitch, 0, 0], adjRoofAssembly);
 
         const axisAdj = roofAxis === 'y' ? Math.PI / 2 : 0;
-        let finalShape = rotate([0, 0, axisAdj], union(cutBasePrism, rotatedRoofAssembly))
+        let finalShape = rotate([0, 0, axisAdj], union(roofSupport, rotatedRoofAssembly))
 
         return finalShape;
     }

@@ -1,9 +1,11 @@
 const uxModule = require('./ux');
 
 const init = ({ lib }) => {
-    let swLib = { ...uxModule.init({ lib }) }
+    let swJscadUi = {
+        ux: { ...uxModule.init({ lib }) }
+    }
 
-    return swLib;
+    return swJscadUi;
 }
 
 module.exports = { init };

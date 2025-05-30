@@ -1,11 +1,11 @@
 {
-  "name": "sw-jscad",
+  "name": "sw-jscad-ui",
   "version": "0.5.5",
-  "description": "Salvador Workshop's JSCAD utilities and toolkit",
+  "description": "UX functionality for sw-jscad and sw-jscad-viewer",
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salvador-workshop/sw-jscad.git"
+    "url": "git+https://github.com/salvador-workshop/sw-jscad-ui.git"
   },
   "main": "src/index.js",
   "scripts": {

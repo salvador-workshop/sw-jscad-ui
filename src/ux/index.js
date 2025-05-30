@@ -1,10 +1,10 @@
 
-const init = ({ lib, swLib }) => {
+const init = ({ lib }) => {
     const ux = {
-        colors: require('./colors').init({ lib, swLib }),
+        colors: require('./colors').init({ lib }),
     }
 
-    ux.layers = require('./layers').init({ lib, swLib: { ...swLib, ...ux } });
+    ux.layers = require('./layers').init({ lib });
 
     return ux;
 }

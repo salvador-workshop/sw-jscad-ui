@@ -5,7 +5,7 @@
  * @namespace layers
  */
 
-const layersInit = ({ lib, swLib }) => {
+const layersInit = ({ lib }) => {
     return {}
 }
 

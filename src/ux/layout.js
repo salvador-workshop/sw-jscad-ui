@@ -7,6 +7,7 @@
 
 const layoutUtils = ({ lib, swLib }) => {
     const { cuboid } = lib.primitives;
+    const { union, subtract } = lib.booleans;
     const { translate, center, align } = lib.transforms;
     const { measureDimensions, measureVolume } = lib.measurements;
 
@@ -57,35 +58,69 @@ const layoutUtils = ({ lib, swLib }) => {
         }
     }
 
-    const layoutFrame = ({ title, subtitle, objectDims, layoutDims }) => {
-        // console.log(`layoutFrame() title = ${JSON.stringify(title)}, subtitle = ${JSON.stringify(subtitle)}`);
-        // console.log(`    objectDims = ${JSON.stringify(objectDims)}, layoutDims = ${JSON.stringify(layoutDims)}`);
-        // const titleText = textUtils.flatText({
-        //     message: title,
-        //     fontSize: 6,
-        //     charLineWidth: 1.25,
-        //     extrudeHeight: 1,
-        // });
+    const layoutFrame = ({ title, subtitle = '. . .', data1 = '..', data2 = '....', objectDims, layoutDims }) => {
+        const frameWidth = 1.5;
+        const recessDepth = 0.6667;
+        const panelOpts = {
+            extrudeHeight: recessDepth,
+            panelThickness: frameWidth + recessDepth,
+            panelOffset: (frameWidth + recessDepth) * 2,
+        }
 
-        // const subtitleText = textUtils.flatText({
-        //     message: subtitle,
-        //     fontSize: 4,
-        //     charLineWidth: 1,
-        //     extrudeHeight: 0.75,
-        // });
-
-        // const bigBox = cuboid({
-        //     size: layoutDims,
-        // });
-
-        // const smallBox = cuboid({
-        //     size: objectDims,
-        // });
-
-        return frameCuboid({
-            size: [5, 5, 5],
-            frameWidth: 2,
+        const titleText = text.textPanel({
+            message: title,
+            fontSize: 3.5,
+            charLineWidth: 1,
+            ...panelOpts,
         });
+
+        const subtitleText = text.textPanel({
+            message: subtitle,
+            fontSize: 3,
+            charLineWidth: 0.75,
+            ...panelOpts,
+        });
+
+        const data1Text = text.textPanel({
+            message: data1,
+            fontSize: 3,
+            charLineWidth: 0.75,
+            ...panelOpts,
+        });
+
+        const data2Text = text.textPanel({
+            message: data2,
+            fontSize: 3,
+            charLineWidth: 0.75,
+            ...panelOpts,
+        });
+
+        const basicFrame = subtract(
+            cuboid({ size: [layoutDims[0], layoutDims[1], frameWidth] }),
+            cuboid({ size: [layoutDims[0] - (frameWidth * 2), layoutDims[1] - (frameWidth * 2), 3] }),
+        );
+
+        const ctrlPts = {
+            topLeft: [layoutDims[0] / -2, layoutDims[1] / 2],
+            topRight: [layoutDims[0] / 2, layoutDims[1] / 2],
+            bottomLeft: [layoutDims[0] / -2, layoutDims[1] / -2],
+            bottomRight: [layoutDims[0] / 2, layoutDims[1] / -2],
+        }
+
+        const alignmentSlots = {
+            topLeft: { modes: ['min', 'max', 'min'], relativeTo: [...ctrlPts.topLeft, 0] },
+            topRight: { modes: ['max', 'max', 'min'], relativeTo: [...ctrlPts.topRight, 0] },
+            bottomLeft: { modes: ['min', 'min', 'min'], relativeTo: [...ctrlPts.bottomLeft, 0] },
+            bottomRight: { modes: ['max', 'min', 'min'], relativeTo: [...ctrlPts.bottomRight, 0] },
+        }
+
+        return union(
+            align({ modes: ['center', 'center', 'min'] }, basicFrame),
+            align(alignmentSlots.topLeft, data1Text),
+            align(alignmentSlots.topRight, data2Text),
+            align(alignmentSlots.bottomLeft, titleText),
+            align(alignmentSlots.bottomRight, subtitleText),
+        );
     }
 
     const linearLayout = ({ layoutOpts }) => {

@@ -10,11 +10,9 @@ const layoutUtils = ({ lib, swLib }) => {
     const { translate, center, align } = lib.transforms;
     const { measureDimensions, measureVolume } = lib.measurements;
 
-    const {
-        text,
-        maths
-    } = swLib
-    const { frameCuboid } = swLib.superPrimitives;
+    const { text } = swLib.core
+    const { maths } = swLib.utils
+    const { frameCuboid } = swLib.utils.superPrimitives;
 
     const layoutElements = new Map();
     let largestDimensionX = 0;

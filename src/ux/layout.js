@@ -136,15 +136,20 @@ const layoutUtils = ({ lib, swLib }) => {
                 offsets.z = offsets.z + layoutOpts.relativeTo[2];
             }
 
+            const gridUnits = [
+                largestDimension()[0] + layoutOpts.layoutSpace,
+                largestDimension()[1] + layoutOpts.layoutSpace,
+            ]
+
             let layoutPosition = [
-                largestDimension()[0] * idx + offsets.x,
+                gridUnits[0] * idx + offsets.x,
                 offsets.y,
                 offsets.z
             ];
             if (layoutOpts.column) {
                 layoutPosition = [
                     offsets.x,
-                    largestDimension()[1] * idx + offsets.y,
+                    gridUnits[1] * idx + offsets.y,
                     offsets.z
                 ];
             }
@@ -194,9 +199,14 @@ const layoutUtils = ({ lib, swLib }) => {
                 offsets.z = offsets.z + layoutOpts.relativeTo[2];
             }
 
+            const gridUnits = [
+                largestDimension()[0] + layoutOpts.layoutSpace,
+                largestDimension()[1] + layoutOpts.layoutSpace,
+            ]
+
             let layoutPosition = [
-                largestDimension()[0] * gridPos.col + offsets.x,
-                largestDimension()[1] * gridPos.row + offsets.y,
+                gridUnits[0] * gridPos.col + offsets.x,
+                gridUnits[1] * gridPos.row + offsets.y,
                 offsets.z
             ];
 

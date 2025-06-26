@@ -11,8 +11,7 @@ const layoutUtils = ({ lib, swLib }) => {
     const { translate, center, align } = lib.transforms;
     const { measureDimensions, measureVolume } = lib.measurements;
 
-    const { text } = swLib.core
-    const { maths } = swLib.utils
+    const { text, maths } = swLib.core
     const { frameCuboid } = swLib.utils.superPrimitives;
 
     const layoutElements = new Map();

@@ -12,6 +12,7 @@ const layoutUtils = ({ lib, swLib }) => {
     const { measureDimensions, measureVolume } = lib.measurements;
     const { vectorText } = lib.text
     const { hullChain } = lib.hulls
+    const isGeom2 = lib.geometries.geom2.isA
 
     const { text, maths } = swLib.core
     const { geometry } = swLib.utils
@@ -66,7 +67,6 @@ const layoutUtils = ({ lib, swLib }) => {
     }
 
     const addLayoutEntry = ({ layoutEntry }) => {
-        console.log(`addLayoutEntry() layoutEntry.id = ${JSON.stringify(layoutEntry.id)}, layoutEntry.desc = ${JSON.stringify(layoutEntry.desc)}`);
         layoutElements.set(layoutEntry.id, layoutEntry);
         const newEntries = [...sortedLayoutEntries, layoutEntry];
         sortedLayoutEntries = newEntries.sort(dimsSizeAsc);
@@ -106,7 +106,6 @@ const layoutUtils = ({ lib, swLib }) => {
 
         if (is2D) {
             // 2D Frame
-            console.log('2D frame!')
 
             const titleText = basicText({
                 message: title,
@@ -116,21 +115,21 @@ const layoutUtils = ({ lib, swLib }) => {
             });
 
             const subtitleText = basicText({
-                message: title,
+                message: subtitle,
                 fontSize: 3,
                 charLineWidth: 0.75,
                 ...frameOpts,
             });;
 
             const data1Text = basicText({
-                message: title,
+                message: data1,
                 fontSize: 3,
                 charLineWidth: 0.75,
                 ...frameOpts,
             });;
 
             const data2Text = basicText({
-                message: title,
+                message: data2,
                 fontSize: 3,
                 charLineWidth: 0.75,
                 ...frameOpts,
@@ -162,7 +161,6 @@ const layoutUtils = ({ lib, swLib }) => {
         }
 
         // 3D Frame
-        console.log('3D frame!')
         const recessDepth = 0.6667;
         frameOpts.extrudeHeight = recessDepth;
         frameOpts.panelThickness = frameWidth + recessDepth;
@@ -211,11 +209,9 @@ const layoutUtils = ({ lib, swLib }) => {
     }
 
     const linearLayout = ({ layoutOpts }) => {
-        console.log(`linearLayout() layoutOpts = ${JSON.stringify(layoutOpts)}`);
         const layoutContent = [];
 
         layoutElements.values().forEach((val, idx) => {
-            // console.log(val, idx);
             const offsets = { x: 0, y: 0, z: 0 };
             if (layoutOpts.relativeTo) {
                 offsets.x = offsets.x + layoutOpts.relativeTo[0];
@@ -244,16 +240,17 @@ const layoutUtils = ({ lib, swLib }) => {
             const nextLayoutGeoms = [
                 translate(layoutPosition, val.geom),
             ]
-            console.log(`    layoutPosition = ${JSON.stringify(layoutPosition)}`)
+
             const skipFrame = layoutOpts.noFrame || val.tags.includes('noFrame');
-            console.log(`    skipFrame = ${skipFrame}`)
+            const is2D = val.tags.includes('is2D');
+
             if (!skipFrame) {
                 const frameGeom = translate(layoutPosition, layoutFrame({
                     title: val.name,
                     subtitle: val.desc,
                     objectDims: val.objectDims,
                     layoutDims: val.layoutDims,
-                    is2D: layoutOpts.is2D,
+                    is2D,
                 }));
                 nextLayoutGeoms.push(frameGeom)
             }
@@ -266,9 +263,6 @@ const layoutUtils = ({ lib, swLib }) => {
     const gridLayout = ({ layoutOpts }) => {
         const gridSize = maths.factorize(layoutElements.size);
         const numColumns = gridSize[1];
-        console.log(`gridLayout() layoutOpts = ${JSON.stringify(layoutOpts)}`);
-        console.log(`    largestDimension = ${JSON.stringify(largestDimension())}`);
-        console.log(`    gridSize = ${JSON.stringify(gridSize)}`);
         const layoutContent = [];
 
         let gridRow = -1;
@@ -278,7 +272,6 @@ const layoutUtils = ({ lib, swLib }) => {
                 gridRow += 1;
             }
             const gridPos = { row: gridRow, col: gridCol };
-            console.log(`    gridPos = ${JSON.stringify(gridPos)}`);
 
             const offsets = { x: 0, y: 0, z: 0 };
             if (layoutOpts.relativeTo) {
@@ -301,16 +294,15 @@ const layoutUtils = ({ lib, swLib }) => {
             const nextLayoutGeoms = [
                 translate(layoutPosition, val.geom),
             ]
-            console.log(`    layoutPosition = ${JSON.stringify(layoutPosition)}`)
             const skipFrame = layoutOpts.noFrame || val.tags.includes('noFrame');
-            console.log(`    skipFrame = ${skipFrame}`)
+            const is2D = val.tags.includes('is2D');
             if (!skipFrame) {
                 const frameGeom = translate(layoutPosition, layoutFrame({
                     title: val.name,
                     subtitle: val.desc,
                     objectDims: val.objectDims,
                     layoutDims: val.layoutDims,
-                    is2D: layoutOpts.is2D,
+                    is2D,
                 }));
                 nextLayoutGeoms.push(frameGeom)
             }
@@ -340,8 +332,6 @@ const layoutUtils = ({ lib, swLib }) => {
             tags = [],
             layoutOpts = {},
         }, geom) => {
-            console.log(`addToLayout() name = ${JSON.stringify(name)}, desc = ${JSON.stringify(desc)}`);
-            // console.log(`    tags = ${JSON.stringify(tags)}, layoutOpts = ${JSON.stringify(layoutOpts)}`);
             const layoutId = name + '-randomTag';
             const objectDims = measureDimensions(geom);
             const layoutMargin = layoutOpts.layoutMargin || 10;
@@ -350,16 +340,14 @@ const layoutUtils = ({ lib, swLib }) => {
                 layoutMargin * 2 + objectDims[1],
                 layoutMargin * 2 + objectDims[2],
             ];
-            if (!!layoutOpts.minSize) {
-                // use minimum sizes if necessary
-                console.log(`    layoutOpts.minSize = ${JSON.stringify(layoutOpts.minSize)}`);
-            }
-
+            const extraTags = [
+                isGeom2(geom) ? 'is2D' : 'is3D'
+            ]
             const layoutEntry = {
                 id: layoutId,
                 name,
                 desc,
-                tags,
+                tags: [...tags, ...extraTags],
                 geom: align({ modes: ['center', 'center', 'min'] }, geom),
                 objectDims,
                 layoutDims,

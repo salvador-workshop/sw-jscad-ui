@@ -13,6 +13,7 @@ const layoutUtils = ({ lib, swLib }) => {
     const { vectorText } = lib.text
     const { hullChain } = lib.hulls
     const isGeom2 = lib.geometries.geom2.isA
+    const isPath2 = lib.geometries.path2.isA
 
     const { text, maths } = swLib.core
     const { geometry } = swLib.utils
@@ -341,7 +342,7 @@ const layoutUtils = ({ lib, swLib }) => {
                 layoutMargin * 2 + objectDims[2],
             ];
             const extraTags = [
-                isGeom2(geom) ? 'is2D' : 'is3D'
+                isGeom2(geom) || isPath2(geom) ? 'is2D' : 'is3D'
             ]
             const layoutEntry = {
                 id: layoutId,

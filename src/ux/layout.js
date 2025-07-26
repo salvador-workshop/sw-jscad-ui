@@ -8,16 +8,14 @@
 const layoutUtils = ({ lib, swLib }) => {
     const { cuboid, rectangle, circle } = lib.primitives;
     const { union, subtract } = lib.booleans;
-    const { translate, center, align } = lib.transforms;
-    const { measureDimensions, measureVolume } = lib.measurements;
+    const { translate, align } = lib.transforms;
+    const { measureDimensions } = lib.measurements;
     const { vectorText } = lib.text
     const { hullChain } = lib.hulls
     const isGeom2 = lib.geometries.geom2.isA
     const isPath2 = lib.geometries.path2.isA
 
     const { text, maths } = swLib.core
-    const { geometry } = swLib.utils
-    const { frameCuboid } = swLib.utils.superPrimitives;
 
     const layoutElements = new Map();
     let largestDimensionX = 0;

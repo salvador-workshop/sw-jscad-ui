@@ -14,8 +14,8 @@ const layoutUtils = ({ lib, swLib }) => {
     const isPath2 = lib.geometries.path2.isA
 
     const { maths } = swLib.core
-    const { text2d } = swLib.profiles
-    const { text3d } = swLib.prefab
+    const { text2d } = swLib.models.profiles
+    const { text3d } = swLib.models.prefab
 
     const layoutElements = new Map();
     let largestDimensionX = 0;

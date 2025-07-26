@@ -6,16 +6,16 @@
  */
 
 const layoutUtils = ({ lib, swLib }) => {
-    const { cuboid, rectangle, circle } = lib.primitives;
+    const { cuboid, rectangle } = lib.primitives;
     const { union, subtract } = lib.booleans;
     const { translate, align } = lib.transforms;
     const { measureDimensions } = lib.measurements;
-    const { vectorText } = lib.text
-    const { hullChain } = lib.hulls
     const isGeom2 = lib.geometries.geom2.isA
     const isPath2 = lib.geometries.path2.isA
 
-    const { text, maths } = swLib.core
+    const { maths } = swLib.core
+    const { text2d } = swLib.profiles
+    const { text3d } = swLib.prefab
 
     const layoutElements = new Map();
     let largestDimensionX = 0;
@@ -44,25 +44,6 @@ const layoutUtils = ({ lib, swLib }) => {
         } else {
             return 0;
         }
-    }
-
-    /**
-     * Creates a simple 2D line of text
-     * (move to main module once done)
-     * @param {*} param0 
-     * @returns ...
-     */
-    const basicText = (opts) => {
-        const lineRadius = opts.charLineWidth / 2
-        const lineCorner = circle({ radius: lineRadius })
-
-        const lineSegmentPointArrays = vectorText({ x: 0, y: 0, input: opts.message, height: opts.fontSize }) // line segments for each character
-        const lineSegments = []
-        lineSegmentPointArrays.forEach((segmentPoints) => { // process the line segment
-            const corners = segmentPoints.map((point) => translate(point, lineCorner))
-            lineSegments.push(hullChain(corners))
-        })
-        return union(lineSegments)
     }
 
     const addLayoutEntry = ({ layoutEntry }) => {
@@ -106,28 +87,28 @@ const layoutUtils = ({ lib, swLib }) => {
         if (is2D) {
             // 2D Frame
 
-            const titleText = basicText({
+            const titleText = text2d.basicText({
                 message: title,
                 fontSize: 3.5,
                 charLineWidth: 1,
                 ...frameOpts,
             });
 
-            const subtitleText = basicText({
+            const subtitleText = text2d.basicText({
                 message: subtitle,
                 fontSize: 3,
                 charLineWidth: 0.75,
                 ...frameOpts,
             });;
 
-            const data1Text = basicText({
+            const data1Text = text2d.basicText({
                 message: data1,
                 fontSize: 3,
                 charLineWidth: 0.75,
                 ...frameOpts,
             });;
 
-            const data2Text = basicText({
+            const data2Text = text2d.basicText({
                 message: data2,
                 fontSize: 3,
                 charLineWidth: 0.75,
@@ -165,28 +146,28 @@ const layoutUtils = ({ lib, swLib }) => {
         frameOpts.panelThickness = frameWidth + recessDepth;
         frameOpts.panelOffset = (frameWidth + recessDepth) * 2;
 
-        const titleText = text.textPanel({
+        const titleText = text3d.textPanel({
             message: title,
             fontSize: 3.5,
             charLineWidth: 1,
             ...frameOpts,
         });
 
-        const subtitleText = text.textPanel({
+        const subtitleText = text3d.textPanel({
             message: subtitle,
             fontSize: 3,
             charLineWidth: 0.75,
             ...frameOpts,
         });
 
-        const data1Text = text.textPanel({
+        const data1Text = text3d.textPanel({
             message: data1,
             fontSize: 3,
             charLineWidth: 0.75,
             ...frameOpts,
         });
 
-        const data2Text = text.textPanel({
+        const data2Text = text3d.textPanel({
             message: data2,
             fontSize: 3,
             charLineWidth: 0.75,
